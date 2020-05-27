@@ -1,7 +1,8 @@
 import React from "react";
 import classes from "./Login.module.css"
-
+import { Link } from 'react-router-dom'
 import {
+    Grid,
     Button,
     Card,
     CardHeader,
@@ -13,7 +14,6 @@ import {
     InputGroupAddon,
     InputGroupText,
     InputGroup,
-    Container,
     Row
 } from "reactstrap";
 // core components
@@ -34,7 +34,7 @@ class Login extends React.Component {
                     <Card className="card-signup" style={{ backgroundColor: '#c3afc7' }}>
                         <Form action="" className="form" method="">
                             <CardHeader className="text-center">
-                                <CardTitle tag="h3">
+                                <CardTitle tag="h3" style={{ color: '#e6e7eb' }}>
                                     Sign In
                                 </CardTitle>
 
@@ -75,6 +75,16 @@ class Login extends React.Component {
                                         onBlur={() => this.setState({ lastFocus: true })}
                                     ></Input>
                                 </InputGroup>
+                                <p>
+                                    Not a member?
+                                <Link to="/Signup" variant="body2">
+                                        Create an account
+                                </Link>
+
+                                </p>
+
+
+
 
 
                             </CardBody>

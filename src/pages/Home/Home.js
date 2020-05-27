@@ -1,20 +1,20 @@
 import React from "react";
 import classes from "./Home.module.css";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
     Row,
     Button,
     Container,
-    Col,
-    Modal
+    Col
 } from "reactstrap";
 
 // core components
 import TransparentFooter from "../../components/Footer/TransparentFooter";
 import Signup from "../../components/Signup/Signup";
 function Home() {
-    const [modal2, setModal2] = React.useState(false);
+
     const [firstFocus, setFirstFocus] = React.useState(false);
     const [lastFocus, setLastFocus] = React.useState(false);
     React.useEffect(() => {
@@ -50,20 +50,15 @@ function Home() {
                                 </p>
                             </Col>
                             <Col >
-                                <Button className="btn-round " color="purple" outline type="button" onClick={() => setModal2(true)}>
+                                <Link to="/Signup" >
+                                    <Button className="btn-round " color="purple" outline type="button">
 
-                                    Register now
+                                        Register now
                                     <i className="fas fa-sign-in-alt"></i>
 
-                                </Button>
-                                <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '18px' }}
-                                    toggle={() => setModal2(false)}
-                                    isOpen={modal2}
-                                >
+                                    </Button>
+                                </Link>
 
-                                    <Signup />
-
-                                </Modal>
                             </Col>
                         </Row>
                     </div>

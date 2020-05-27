@@ -17,7 +17,7 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container,
+  Container
 } from "reactstrap";
 
 function NavbarMain() {
