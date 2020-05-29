@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/server/nodemon.json
 /.pnp
 .pnp.js
 

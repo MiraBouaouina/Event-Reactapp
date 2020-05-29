@@ -12,6 +12,7 @@ import {
 
 // core components
 import TransparentFooter from "../../components/Footer/TransparentFooter";
+import NavbarMain from "../../components/Navbars/NavbarMain";
 import Signup from "../../components/Signup/Signup";
 function Home() {
 
@@ -30,7 +31,9 @@ function Home() {
     });
     return (
         <>
+
             <div className="page-header clear-filter" filter-color="#9933ff">
+                <NavbarMain />
                 <div
                     className="page-header-image"
                     style={{

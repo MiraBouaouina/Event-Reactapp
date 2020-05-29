@@ -2,5 +2,8 @@ a {
     color: #e6e7eb;
   }
 a:hover {
-     color: #00F
+     color: #220629;
   }
+.not {
+  color: #575555;
+}

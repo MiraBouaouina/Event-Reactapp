@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Login.module.css"
 import { Link } from 'react-router-dom'
 import {
-    Grid,
     Button,
     Card,
     CardHeader,
@@ -75,7 +74,7 @@ class Login extends React.Component {
                                         onBlur={() => this.setState({ lastFocus: true })}
                                     ></Input>
                                 </InputGroup>
-                                <p>
+                                <p className={classes.not}>
                                     Not a member?
                                 <Link to="/Signup" variant="body2">
                                         Create an account
@@ -83,15 +82,12 @@ class Login extends React.Component {
 
                                 </p>
 
-
-
-
-
                             </CardBody>
                             <CardFooter className="text-center">
+
                                 <Button
-                                    className="btn-neutral btn-round"
-                                    style={{ color: 'grey' }}
+                                    className="btn-round btn-neutral"
+                                    color="default"
                                     href="#pablo"
                                     onClick={e => e.preventDefault()}
                                     size="lg"

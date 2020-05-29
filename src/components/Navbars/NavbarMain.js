@@ -2,16 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Login from "../Login/Login.js";
 import {
-  Button,
-  FormGroup,
   Modal,
-  ModalBody,
-  Row,
-  Col,
   UncontrolledTooltip,
   Collapse,
-  DropdownToggle,
-  UncontrolledDropdown,
   NavbarBrand,
   Navbar,
   NavItem,
@@ -108,7 +101,7 @@ function NavbarMain() {
                   Sign in
                       </UncontrolledTooltip>
               </NavItem>
-              <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '18px' }}
+              <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
                 toggle={() => setModal1(false)}
                 isOpen={modal1}
               >
