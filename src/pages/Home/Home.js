@@ -13,11 +13,7 @@ import {
 // core components
 import TransparentFooter from "../../components/Footer/TransparentFooter";
 import NavbarMain from "../../components/Navbars/NavbarMain";
-import Signup from "../../components/Signup/Signup";
 function Home() {
-
-    const [firstFocus, setFirstFocus] = React.useState(false);
-    const [lastFocus, setLastFocus] = React.useState(false);
     React.useEffect(() => {
         document.body.classList.add("login-page");
         document.body.classList.add("sidebar-collapse");
@@ -53,7 +49,7 @@ function Home() {
                                 </p>
                             </Col>
                             <Col >
-                                <Link to="/Signup" >
+                                <Link to="/signup" >
                                     <Button className="btn-round " color="purple" outline type="button">
 
                                         Register now

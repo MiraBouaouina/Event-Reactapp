@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -32,57 +32,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-    const [values, setValues] = React.useState({
-        password: '',
-        errorMessage: ' Please fill in all boxes !',
-        okayMessage: 'Congrats, your account has been created !',
-        showPassword: false,
-        show: false,
-    });
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState('')
+
 
     const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
+        setShowPassword(!showPassword)
     };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
     const handleClose = () => {
-        setValues({ ...values, show: false });
+        setShowModal(false)
 
     };
 
-    const testHandler = () => {
-        setValues({ ...values, show: true });
+    const signupHandler = (info) => {
 
-        if (firstName.current.value == null || lastName.current.value == null || userName.current.value == null || password.current.value == null) {
-            return (
-                <ModalNotif
-                    show={values.show}
-                    handleClose={handleClose}
-                    message={values.errorMessage} />
-            )
+        console.log(info)
+        if (info.firstName === "" || info.lastName === "" || info.userName === "" || info.password === "") {
+            setErrorMessage("Complete all fields")
 
         } else {
-            return (
-                <ModalNotif
-                    show={values.show}
-                    handleClose={handleClose}
-                    message={values.okayMessage} />
-            )
+            setErrorMessage("Congrats, your account has been created !")
 
         }
+        setShowModal(true) // to show the modal
 
     }
     const classes = useStyles();
-    const firstName = createRef(null);
-    const lastName = createRef(null);
-    const userName = createRef(null);
-    const password = createRef(null);
+
 
 
     React.useEffect(() => {
@@ -98,7 +80,11 @@ export default function SignUp() {
     });
 
     return (
-        <>
+        <div>
+            <ModalNotif
+                show={showModal}
+                handleClose={handleClose}
+                message={errorMessage} />
             <div className="page-header clear-filter" filter-color="#4a4a4a">
                 <div
                     className="page-header-image"
@@ -111,89 +97,97 @@ export default function SignUp() {
 
                     <div className={classes.paper}>
 
-                        <Typography component="h1" variant="h5" style={{ color: 'white' }} >
+                        <Typography component="h1" variant="h5" >
                             Sign up
                         </Typography>
-                        <form className={classes.form} noValidate>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        autoComplete="fname"
-                                        name="firstName"
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        ref={firstName}
-                                        label="First Name"
-                                        autoFocus
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        ref={lastName}
-                                        label="Last Name"
-                                        name="lastName"
-                                        autoComplete="lname"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        ref={userName}
-                                        label="Username"
-                                        name="username"
 
+                        <Grid className={classes.form} container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+
+                                    id="firstName"
+                                    autoComplete="fname"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="First Name"
+                                    autoFocus
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    id="lastName"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="Last Name"
+                                    name="lastName"
+                                    autoComplete="lname"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    id="userName"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="Username"
+                                    name="username"
+                                    autoComplete="lname"
+
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl fullWidth required variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                    <OutlinedInput
+
+                                        id="password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        labelWidth={70}
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl fullWidth required="true" variant="outlined">
-                                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                        <OutlinedInput
-
-                                            id="outlined-adornment-password"
-                                            type={values.showPassword ? 'text' : 'password'}
-                                            value={values.password}
-                                            onChange={handleChange('password')}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowPassword}
-                                                        onMouseDown={handleMouseDownPassword}
-                                                        edge="end"
-                                                    >
-                                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                            labelWidth={70}
-                                        />
-                                    </FormControl>
-
-                                </Grid>
+                                </FormControl>
 
                             </Grid>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                                onClick={testHandler}
-                            >
-                                Sign Up
+
+                        </Grid>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={() => {
+                                signupHandler({
+                                    firstName: document.getElementById('firstName').value,
+                                    lastName: document.getElementById('lastName').value,
+                                    userName: document.getElementById('userName').value,
+                                    password: document.getElementById('password').value
+                                })
+                            }}
+                        >
+                            Sign Up
                             </Button>
 
-                        </form>
+
                     </div>
 
+
                 </Container>
+
             </div>
-        </>
+
+        </div>
     );
 }

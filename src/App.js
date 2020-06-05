@@ -10,7 +10,6 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-
                 <Switch>
                     <Route path="/home" render={() => <Home />} />
                     <Route path="/signup" render={() => <Signup />} />
