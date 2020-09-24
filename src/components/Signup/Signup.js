@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./Signup.module.css";
 import { Link } from "react-router-dom";
 
 import {
@@ -127,9 +128,17 @@ function SignUp() {
                                         onBlur={() => setFirstFocus(false)}
                                     ></Input>
                                     <InputGroupAddon addonType="append">
-                                        <Button color="secondary">
-                                            I'm a button
-                                        </Button>
+                                        <InputGroupText>
+                                            <i
+                                                className={classes.icons}
+                                                class={showPassword === 'true' ? "far fa-eye-slash" : "fa fa-eye"}
+                                                onClick={handleClickShowPassword}
+
+                                            >
+                                            </i>
+                                        </InputGroupText>
+
+
                                     </InputGroupAddon>
                                 </InputGroup>
                             </CardBody>
@@ -157,7 +166,7 @@ function SignUp() {
                     </Card>
                 </Col>
             </Container>
-        </div>
+        </div >
 
     );
 }

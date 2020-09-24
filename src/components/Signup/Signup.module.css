@@ -1,14 +1,9 @@
-.paper {
-    margin-top: 16px;
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-
-}
-.form {
-    width: 100%;
-    margin-top: 24px,
-}
-.submit {
-    margin: theme.spacing(3, 0, 2),
+.icons{
+  display: inline-block;
+  font: normal normal normal 14px/1 'Nucleo Outline';
+  font-size: inherit;
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
