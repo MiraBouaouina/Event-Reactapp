@@ -25,48 +25,47 @@ function Home() {
             document.body.classList.remove("sidebar-collapse");
         };
     });
+
     return (
-        <>
 
-            <div className="page-header clear-filter" filter-color="#9933ff">
-                <NavbarMain />
-                <div
-                    className="page-header-image"
-                    style={{
-                        backgroundImage: "url(" + require("assets/img/event3.jpg") + ")"
-                    }}>
+        <div className="page-header clear-filter" filter-color="#5b14ff"> {/*9933ff*/}
+            <NavbarMain />
+            <div
+                className="page-header-image"
+                style={{
+                    backgroundImage: "url(" + require("assets/img/event3.jpg") + ")"
+                }}>
 
-                </div>
-                <Container className={classes.contenu}>
-                    <div className="content-center brand">
+            </div>
+            <Container className={classes.contenu}>
+                <div className="content-center brand">
 
-                        <h3 className="h1-seo">KEEP YOUR EYE</h3>
-                        <h1>ON THE MAIN EVENT </h1>
-                        <Row>
-                            <Col className={classes.header} md="8">
-                                <p >
-                                    Create your own event or reserve your ticket !
-                                </p>
-                            </Col>
-                            <Col >
-                                <Link to="/signup" >
-                                    <Button className="btn-round " color="purple" outline type="button">
+                    <h3 className="h1-seo">KEEP YOUR EYE</h3>
+                    <h1>ON THE MAIN EVENT </h1>
+                    <Row>
+                        <Col className={classes.header} md="8">
+                            <p>
+                                Create your own event or reserve your ticket !
+                            </p>
+                        </Col>
+                        <Col >
+                            <Link to="/signup" >
+                                <Button className="btn-round " color="purple" outline type="button">
 
-                                        Register now
+                                    Register now
                                     <i className="fas fa-sign-in-alt"></i>
 
-                                    </Button>
-                                </Link>
+                                </Button>
+                            </Link>
 
-                            </Col>
-                        </Row>
-                    </div>
+                        </Col>
+                    </Row>
+                </div>
 
-                </Container>
-                <TransparentFooter />
+            </Container>
+            <TransparentFooter />
 
-            </div >
-        </>
+        </div >
     );
 }
 export default Home;

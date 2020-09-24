@@ -30,8 +30,8 @@ class Login extends React.Component {
         return (
             <>
                 <Row>
-                    <Card className="card-signup" style={{ backgroundColor: '#c3afc7' }}>
-                        <Form action="" className="form" method="">
+                    <Card className="card-signup" style={{ backgroundColor: '#c4a7bc' }}> {/*95b3b8 aaaaaa*/}
+                        < Form action="" className="form" method="">
                             <CardHeader className="text-center">
                                 <CardTitle tag="h3" style={{ color: '#e6e7eb' }}>
                                     Sign In
@@ -77,8 +77,8 @@ class Login extends React.Component {
                                 <p className={classes.not}>
                                     Not a member?
                                 <Link to="/Signup" variant="body2">
-                                        Create an account
-                                </Link>
+                                        <strong> Create an account</strong>
+                                    </Link>
 
                                 </p>
 

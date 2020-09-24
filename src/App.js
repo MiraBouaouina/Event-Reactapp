@@ -1,7 +1,6 @@
 
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
 // pages for this kit
 import Signup from "./components/Signup/Signup"
 import Home from "./pages/Home/Home"
@@ -21,4 +20,3 @@ class App extends React.Component {
     }
 }
 export default App;
-
