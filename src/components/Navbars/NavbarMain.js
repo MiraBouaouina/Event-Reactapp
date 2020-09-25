@@ -87,7 +87,7 @@ function NavbarMain() {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/creativetimofficial/now-ui-kit-react/issues?ref=creativetim">
+                <NavLink to="/events" tag={Link}>
                   Events
                 </NavLink>
               </NavItem>

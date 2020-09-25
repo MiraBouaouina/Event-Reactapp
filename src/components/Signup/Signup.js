@@ -38,7 +38,7 @@ function SignUp() {
         };
     });
     return (
-        <div className="page-header clear-filter" filter-color="blue">
+        <div className="page-header clear-filter" filter-color="#5b14ff">
             <div
                 className="page-header-image"
                 style={{
@@ -128,10 +128,10 @@ function SignUp() {
                                         onBlur={() => setFirstFocus(false)}
                                     ></Input>
                                     <InputGroupAddon addonType="append">
-                                        <InputGroupText>
+                                        <InputGroupText style={{ padding: "15px 16px 15px" }}>
                                             <i
-                                                className={classes.icons}
-                                                class={showPassword === 'true' ? "far fa-eye-slash" : "fa fa-eye"}
+
+                                                class={showPassword === 'true' ? 'far fa-eye-slash' : 'fa fa-eye'}
                                                 onClick={handleClickShowPassword}
 
                                             >

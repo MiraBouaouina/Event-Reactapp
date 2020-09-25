@@ -1,9 +1,5 @@
 .icons{
-  display: inline-block;
-  font: normal normal normal 14px/1 'Nucleo Outline';
-  font-size: inherit;
-  text-transform: none;
-  /* Better Font Rendering */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  align-content: center;
+ 
 }
