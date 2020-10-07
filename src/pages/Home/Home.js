@@ -50,7 +50,7 @@ function Home() {
                         </Col>
                         <Col >
                             <Link to="/signup" >
-                                <Button className="btn-round " color="purple" outline type="button">
+                                <Button className="btn-round " color="purple" outline>
 
                                     Register now
                                     <i className="fas fa-sign-in-alt"></i>

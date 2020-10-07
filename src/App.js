@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Signup from "./components/Signup/Signup"
 import Home from "./pages/Home/Home"
 import Events from "./pages/Events/Events"
+import Profile from "./pages/Profile/Profile"
 class App extends React.Component {
 
     render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
                     <Route path="/home" render={() => <Home />} />
                     <Route path="/signup" render={() => <Signup />} />
                     <Route path="/events" render={() => <Events />} />
+                    <Route path="/profile" render={() => <Profile />} />
                     <Redirect to="/home" />
                 </Switch>
 

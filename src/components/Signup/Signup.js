@@ -20,6 +20,9 @@ import {
 function SignUp() {
     const [firstFocus, setFirstFocus] = React.useState(false);
     const [lastFocus, setLastFocus] = React.useState(false);
+    const [userFocus, setUserFocus] = React.useState(false);
+    const [passFocus, setPassFocus] = React.useState(false);
+
     const [showPassword, setShowPassword] = React.useState(false);
 
 
@@ -77,7 +80,7 @@ function SignUp() {
                                 <InputGroup
                                     className={
                                         "no-border input-lg" +
-                                        (firstFocus ? " input-group-focus" : "")
+                                        (lastFocus ? " input-group-focus" : "")
                                     }
                                 >
                                     <InputGroupAddon addonType="prepend">
@@ -95,7 +98,7 @@ function SignUp() {
                                 <InputGroup
                                     className={
                                         "no-border input-lg" +
-                                        (firstFocus ? " input-group-focus" : "")
+                                        (userFocus ? " input-group-focus" : "")
                                     }
                                 >
                                     <InputGroupAddon addonType="prepend">
@@ -106,14 +109,14 @@ function SignUp() {
                                     <Input
                                         placeholder="Username..."
                                         type="text"
-                                        onFocus={() => setFirstFocus(true)}
-                                        onBlur={() => setFirstFocus(false)}
+                                        onFocus={() => setUserFocus(true)}
+                                        onBlur={() => setUserFocus(false)}
                                     ></Input>
                                 </InputGroup>
                                 <InputGroup style={{ marginBottom: "4px" }}
                                     className={
                                         "no-border input-lg" +
-                                        (lastFocus ? " input-group-focus" : "")
+                                        (passFocus ? " input-group-focus" : "")
                                     }
                                 >
                                     <InputGroupAddon addonType="prepend">
@@ -124,8 +127,8 @@ function SignUp() {
                                     <Input
                                         placeholder="Password..."
                                         type={showPassword ? 'text' : 'password'}
-                                        onFocus={() => setFirstFocus(true)}
-                                        onBlur={() => setFirstFocus(false)}
+                                        onFocus={() => setPassFocus(true)}
+                                        onBlur={() => setPassFocus(false)}
                                     ></Input>
                                     <InputGroupAddon addonType="append">
                                         <InputGroupText style={{ padding: "15px 16px 15px" }}>
