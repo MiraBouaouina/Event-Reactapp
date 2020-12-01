@@ -1,0 +1,15 @@
+.mg{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.rw{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.butt{
+background-color: #5880bf;
+}
+.card{
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+}

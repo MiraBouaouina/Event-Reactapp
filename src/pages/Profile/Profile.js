@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Profile.module.css";
-
+import { Link } from "react-router-dom";
+import classnames from 'classnames';
 // reactstrap components
 import {
-    Button,
-    NavItem,
-    NavLink,
-    Nav,
-    TabContent,
-    TabPane,
     Container,
     Row,
     Col,
-    UncontrolledTooltip
+    Button,
+    TabContent,
+    TabPane,
+    Nav,
+    NavItem,
+    NavLink
 } from "reactstrap";
-const Profile = () => {
-    return (
+//core components
+import NavbarSecond from "../../components/Navbars/NavbarSecond";
+import Aboutme from "../../components/Aboutme/Aboutme";
+import Participations from "../../components/Participations/Participations";
 
+const Profile = () => {
+    const [activeTab, setActiveTab] = useState('1');
+
+    const toggle = tab => {
+        if (activeTab !== tab) setActiveTab(tab);
+    }
+
+    return (
         <div>
-            <Container className={classes.container}>
+            <NavbarSecond />
+            <Container>
                 <div className={classes.head}>
                     <Row>
                         <Col md="2" xs="4">
@@ -37,31 +48,51 @@ const Profile = () => {
                                 Software Engineering Student
                             </h5>
 
+                            <Button style={{
+                                backgroundColor: "#2c2c2c"
+                            }} size="sm">
+                                Edit
+                            </Button>
                         </Col>
                     </Row>
                 </div>
-                <div className={classes.top}>
-                    <Button className="btn-round"
-                        color="defaults">
-                        About
-                    </Button>
-                    <Button className="btn-round" color="info">
-                        Participations
-                    </Button>
-                    <h2>
-                        Events list
-                    </h2>
-                    <h2>
-                        Events list
-                    </h2><h2>
-                        Events list
-                    </h2>
+                <div className={classes.body}>
 
+                    <Nav tabs style={{ justifyContent: "center" }} >
+                        <NavItem>
+                            <NavLink
+                                className={classnames({ active: activeTab === '1' })}
+                                onClick={() => { toggle('1'); }}
+                            >
+                                Contact
+                            </NavLink>
+                        </NavItem>
+
+                        <NavItem>
+                            <NavLink
+                                className={classnames({ active: activeTab === '2' })}
+                                onClick={() => { toggle('2'); }}
+                            >
+                                Participations
+                            </NavLink>
+                        </NavItem>
+
+                    </Nav>
+
+
+
+                    <TabContent activeTab={activeTab}>
+                        <TabPane tabId="1">
+                            <Aboutme email="mira@gmail.com" phone="50605161" fbaccount="Mira Bouaouina" />
+                        </TabPane>
+                        <TabPane tabId="2">
+                            <Participations />
+                        </TabPane>
+                    </TabContent>
 
                 </div>
 
             </Container>
-
 
         </div >
     );

@@ -1,20 +1,20 @@
-.container{
-    margin-top: 12px;
-}
 .head{
-    background-color: #eacdfa;
-    border-radius: 10px;
+    background-color: #cfcccc;
+    border-radius: 8px;
+    margin-top:2px;
 
 }
-.top{
-    background-color: #f7f7e6;
-    border-radius: 10px;
+.body{
+    background-color: #f7f5f5;
+    border-radius: 8px;
    
-    text-align: center;
 }
 .img{
     margin:5px;
 }
 h3{
     margin-bottom: 6px;
+}
+.head h5{
+    color: white;
 }

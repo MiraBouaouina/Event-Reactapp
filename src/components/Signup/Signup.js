@@ -134,7 +134,7 @@ function SignUp() {
                                         <InputGroupText style={{ padding: "15px 16px 15px" }}>
                                             <i
 
-                                                class={showPassword === 'true' ? 'far fa-eye-slash' : 'fa fa-eye'}
+                                                class={showPassword ? 'far fa-eye-slash' : 'fa fa-eye'}
                                                 onClick={handleClickShowPassword}
 
                                             >

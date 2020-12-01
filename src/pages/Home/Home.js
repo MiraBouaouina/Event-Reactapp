@@ -14,6 +14,7 @@ import {
 import TransparentFooter from "../../components/Footer/TransparentFooter";
 import NavbarMain from "../../components/Navbars/NavbarMain";
 function Home() {
+    //Component did update
     React.useEffect(() => {
         document.body.classList.add("login-page");
         document.body.classList.add("sidebar-collapse");

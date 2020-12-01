@@ -15,11 +15,8 @@ import {
     InputGroup,
     Row
 } from "reactstrap";
-// core components
 
 class Login extends React.Component {
-
-
 
     state = {
         firstFocus: false,
@@ -30,7 +27,7 @@ class Login extends React.Component {
         return (
             <>
                 <Row>
-                    <Card className="card-signup" style={{ backgroundColor: '#c4a7bc' }}> {/*95b3b8 aaaaaa*/}
+                    <Card className="card-signup" style={{ backgroundColor: '#a8a7a7' }}> {/*95b3b8 aaaaaa*/}
                         < Form action="" className="form" method="">
                             <CardHeader className="text-center">
                                 <CardTitle tag="h3" style={{ color: '#e6e7eb' }}>
@@ -74,13 +71,13 @@ class Login extends React.Component {
                                         onBlur={() => this.setState({ lastFocus: true })}
                                     ></Input>
                                 </InputGroup>
-                                <p className={classes.not}>
+                                <strong className={classes.not}>
                                     Not a member?
                                 <Link to="/Signup" variant="body2">
                                         <strong> Create an account</strong>
                                     </Link>
 
-                                </p>
+                                </strong>
 
                             </CardBody>
                             <CardFooter className="text-center">
