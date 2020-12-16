@@ -13,9 +13,13 @@ import {
 // core components
 import TransparentFooter from "../../components/Footer/TransparentFooter";
 import NavbarMain from "../../components/Navbars/NavbarMain";
-function Home() {
-    //Component did update
-    React.useEffect(() => {
+class Home extends React.Component {
+    state = {
+
+    }
+    //Component did mount
+
+    componentDidMount() {
         document.body.classList.add("login-page");
         document.body.classList.add("sidebar-collapse");
         document.documentElement.classList.remove("nav-open");
@@ -25,48 +29,53 @@ function Home() {
             document.body.classList.remove("login-page");
             document.body.classList.remove("sidebar-collapse");
         };
-    });
 
-    return (
+    }
+    //Component did update
 
-        <div className="page-header clear-filter" filter-color="#5b14ff"> {/*9933ff*/}
-            <NavbarMain />
-            <div
-                className="page-header-image"
-                style={{
-                    backgroundImage: "url(" + require("assets/img/event3.jpg") + ")"
-                }}>
+    render() {
 
-            </div>
-            <Container className={classes.contenu}>
-                <div className="content-center brand">
+        return (
 
-                    <h3 className="h1-seo">KEEP YOUR EYE</h3>
-                    <h1>ON THE MAIN EVENT </h1>
-                    <Row>
-                        <Col className={classes.header} md="8">
-                            <p>
-                                Create your own event or reserve your ticket !
+            <div className="page-header clear-filter" filter-color="#5b14ff"> {/*9933ff*/}
+                <NavbarMain />
+                <div
+                    className="page-header-image"
+                    style={{
+                        backgroundImage: "url(" + require("assets/img/event3.jpg") + ")"
+                    }}>
+
+                </div>
+                <Container className={classes.contenu}>
+                    <div className="content-center brand">
+
+                        <h3 className="h1-seo">KEEP YOUR EYE</h3>
+                        <h1>ON THE MAIN EVENT </h1>
+                        <Row>
+                            <Col className={classes.header} md="8">
+                                <p>
+                                    Create your own event or reserve your ticket !
                             </p>
-                        </Col>
-                        <Col >
-                            <Link to="/signup" >
-                                <Button className="btn-round " color="purple" outline>
+                            </Col>
+                            <Col >
+                                <Link to="/signup" >
+                                    <Button className="btn-round " color="purple" outline>
 
-                                    Register now
+                                        Register now
                                     <i className="fas fa-sign-in-alt"></i>
 
-                                </Button>
-                            </Link>
+                                    </Button>
+                                </Link>
 
-                        </Col>
-                    </Row>
-                </div>
+                            </Col>
+                        </Row>
+                    </div>
 
-            </Container>
-            <TransparentFooter />
+                </Container>
+                <TransparentFooter />
 
-        </div >
-    );
+            </div >
+        );
+    }
 }
 export default Home;

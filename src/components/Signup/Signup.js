@@ -17,19 +17,21 @@ import {
     Col
 } from "reactstrap";
 
-function SignUp() {
-    const [firstFocus, setFirstFocus] = React.useState(false);
-    const [lastFocus, setLastFocus] = React.useState(false);
-    const [userFocus, setUserFocus] = React.useState(false);
-    const [passFocus, setPassFocus] = React.useState(false);
+class Signup extends React.Component {
+    state = {
+        firstFocus: false,
+        lastFocus: false,
+        userFocus: false,
+        passFocus: false,
+        showPassword: false
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    }
 
+    handleClickShowPassword = () => {
+        this.setState({ showPassword: !this.state.showPassword });
 
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword)
     };
-    React.useEffect(() => {
+    componentDidMount() {
         document.body.classList.add("login-page");
         document.body.classList.add("sidebar-collapse");
         document.documentElement.classList.remove("nav-open");
@@ -39,138 +41,144 @@ function SignUp() {
             document.body.classList.remove("login-page");
             document.body.classList.remove("sidebar-collapse");
         };
-    });
-    return (
-        <div className="page-header clear-filter" filter-color="#5b14ff">
-            <div
-                className="page-header-image"
-                style={{
-                    backgroundImage: "url(" + require("assets/img/event3.jpg") + ")"
-                }}
-            ></div>
 
-            <Container>
-                <Col className="ml-auto mr-auto" md="4">
-                    <Card className="card-login card-plain">
-                        <Form action="" className="form" method="">
-                            <CardHeader >
-                                <h1>
-                                    Sign Up
+    }
+    render() {
+
+        return (
+
+            <div className="page-header clear-filter" filter-color="#5b14ff">
+                <div
+                    className="page-header-image"
+                    style={{
+                        backgroundImage: "url(" + require("assets/img/event3.jpg") + ")"
+                    }}
+                ></div>
+
+                <Container>
+                    <Col className="ml-auto mr-auto" md="4">
+                        <Card className="card-login card-plain">
+                            <Form action="" className="form" method="">
+                                <CardHeader >
+                                    <h1>
+                                        Sign Up
                                 </h1>
-                            </CardHeader>
-                            <CardBody>
-                                <InputGroup
-                                    className={
-                                        "no-border input-lg" +
-                                        (firstFocus ? " input-group-focus" : "")
-                                    }
-                                >
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>
-                                            <i className="now-ui-icons users_circle-08"></i>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input
-                                        placeholder="First Name..."
-                                        type="text"
-                                        onFocus={() => setFirstFocus(true)}
-                                        onBlur={() => setFirstFocus(false)}
-                                    ></Input>
-                                </InputGroup>
-                                <InputGroup
-                                    className={
-                                        "no-border input-lg" +
-                                        (lastFocus ? " input-group-focus" : "")
-                                    }
-                                >
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>
-                                            <i className="now-ui-icons users_circle-08"></i>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input
-                                        placeholder="Last Name..."
-                                        type="text"
-                                        onFocus={() => setLastFocus(true)}
-                                        onBlur={() => setLastFocus(false)}
-                                    ></Input>
-                                </InputGroup>
-                                <InputGroup
-                                    className={
-                                        "no-border input-lg" +
-                                        (userFocus ? " input-group-focus" : "")
-                                    }
-                                >
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>
-                                            <i className="now-ui-icons text_caps-small"></i>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input
-                                        placeholder="Username..."
-                                        type="text"
-                                        onFocus={() => setUserFocus(true)}
-                                        onBlur={() => setUserFocus(false)}
-                                    ></Input>
-                                </InputGroup>
-                                <InputGroup style={{ marginBottom: "4px" }}
-                                    className={
-                                        "no-border input-lg" +
-                                        (passFocus ? " input-group-focus" : "")
-                                    }
-                                >
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>
-                                            <i className="now-ui-icons ui-1_lock-circle-open"></i>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input
-                                        placeholder="Password..."
-                                        type={showPassword ? 'text' : 'password'}
-                                        onFocus={() => setPassFocus(true)}
-                                        onBlur={() => setPassFocus(false)}
-                                    ></Input>
-                                    <InputGroupAddon addonType="append">
-                                        <InputGroupText style={{ padding: "15px 16px 15px" }}>
-                                            <i
+                                </CardHeader>
+                                <CardBody>
+                                    <InputGroup
+                                        className={
+                                            "no-border input-lg" +
+                                            (this.state.firstFocus ? " input-group-focus" : "")
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="now-ui-icons users_circle-08"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="First Name..."
+                                            type="text"
+                                            onFocus={() => this.setState({ firstFocus: true })}
+                                            onBlur={() => this.setState({ firstFocus: false })}
+                                        ></Input>
+                                    </InputGroup>
+                                    <InputGroup
+                                        className={
+                                            "no-border input-lg" +
+                                            (this.state.lastFocus ? " input-group-focus" : "")
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="now-ui-icons users_circle-08"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="Last Name..."
+                                            type="text"
+                                            onFocus={() => this.setState({ lastFocus: true })}
+                                            onBlur={() => this.setState({ lastFocus: false })}
+                                        ></Input>
+                                    </InputGroup>
+                                    <InputGroup
+                                        className={
+                                            "no-border input-lg" +
+                                            (this.state.userFocus ? " input-group-focus" : "")
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="now-ui-icons text_caps-small"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="Username..."
+                                            type="text"
+                                            onFocus={() => this.setState({ userFocus: true })}
+                                            onBlur={() => this.setState({ userFocus: false })}
+                                        ></Input>
+                                    </InputGroup>
+                                    <InputGroup style={{ marginBottom: "4px" }}
+                                        className={
+                                            "no-border input-lg" +
+                                            (this.state.passFocus ? " input-group-focus" : "")
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="Password..."
+                                            type={this.state.showPassword ? 'text' : 'password'}
+                                            onFocus={() => this.setState({ passFocus: true })}
+                                            onBlur={() => this.setState({ passFocus: false })}
+                                        ></Input>
+                                        <InputGroupAddon addonType="append">
+                                            <InputGroupText style={{ padding: "15px 16px 15px" }}>
+                                                <i
 
-                                                class={showPassword ? 'far fa-eye-slash' : 'fa fa-eye'}
-                                                onClick={handleClickShowPassword}
+                                                    class={this.state.showPassword ? 'far fa-eye-slash' : 'fa fa-eye'}
+                                                    onClick={this.handleClickShowPassword}
 
-                                            >
-                                            </i>
-                                        </InputGroupText>
+                                                >
+                                                </i>
+                                            </InputGroupText>
 
 
-                                    </InputGroupAddon>
-                                </InputGroup>
-                            </CardBody>
-                            <CardFooter >
-                                <Button
-                                    block
-                                    className="btn-round"
-                                    color="info"
-                                    size="lg"
-                                >
-                                    Get Started
+                                        </InputGroupAddon>
+                                    </InputGroup>
+                                </CardBody>
+                                <CardFooter >
+                                    <Button
+                                        block
+                                        className="btn-round"
+                                        color="info"
+                                        size="lg"
+                                    >
+                                        Get Started
                     </Button>
-                                <div className="pull-left">
-                                    <h6>
-                                        <Link
-                                            className="link"
-                                            to="/home"                                        >
-                                            Go back
+                                    <div className="pull-left">
+                                        <h6>
+                                            <Link
+                                                className="link"
+                                                to="/home"                                        >
+                                                Go back
                                         </Link>
-                                    </h6>
-                                </div>
+                                        </h6>
+                                    </div>
 
-                            </CardFooter>
-                        </Form>
-                    </Card>
-                </Col>
-            </Container>
-        </div >
+                                </CardFooter>
+                            </Form>
+                        </Card>
+                    </Col>
+                </Container>
+            </div >
 
-    );
+        );
+    }
 }
-export default SignUp;
+
+export default Signup;
