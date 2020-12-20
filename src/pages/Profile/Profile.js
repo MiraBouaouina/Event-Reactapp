@@ -58,9 +58,10 @@ const Profile = () => {
                 </div>
                 <div className={classes.body}>
 
-                    <Nav tabs style={{ justifyContent: "center" }} >
+                    <Nav tabs style={{ display: 'flex', justifyContent: "center" }} >
                         <NavItem>
                             <NavLink
+                                style={{ maxWidth: '150px' }}
                                 className={classnames({ active: activeTab === '1' })}
                                 onClick={() => { toggle('1'); }}
                             >
@@ -70,6 +71,8 @@ const Profile = () => {
 
                         <NavItem>
                             <NavLink
+                                style={{ maxWidth: '150px' }}
+
                                 className={classnames({ active: activeTab === '2' })}
                                 onClick={() => { toggle('2'); }}
                             >

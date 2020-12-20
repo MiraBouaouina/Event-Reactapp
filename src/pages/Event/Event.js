@@ -17,6 +17,8 @@ import {
 
 //core components
 import NavbarSecond from "../../components/Navbars/NavbarSecond";
+import Footer from "../../components/Footer/Footer";
+
 
 class Event extends React.Component {
     state={activeTab:'1'}
@@ -101,10 +103,10 @@ class Event extends React.Component {
                             <h4>
                                 Event schedule
                             </h4>
-                            <Nav tabs >
+                            <Nav tabs style={{display: 'flex'}}>
     
                                 <NavItem>
-                                    <NavLink
+                                    <NavLink style={{maxWidth: '150px'}}
                                         className={classnames({ active: this.state.activeTab === '1' })}
                                         onClick={() => { this.toggle('1'); }}
                                     >
@@ -113,7 +115,7 @@ class Event extends React.Component {
                                 </NavItem>
     
                                 <NavItem>
-                                    <NavLink
+                                    <NavLink  style={{maxWidth: '150px'}}
                                         className={classnames({ active: this.state.activeTab === '2' })}
                                         onClick={() => { this.toggle('2'); }}
                                     >
@@ -164,9 +166,21 @@ class Event extends React.Component {
                             </TabContent>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col>
+                        <h4>
+                            Speakers
+                        </h4>
+
+
+                        </Col>
+                    </Row>
                     <div>
                     </div>
                 </Container >
+                <Footer />
+
+                
     
             </div >
         );

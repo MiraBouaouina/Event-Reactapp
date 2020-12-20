@@ -31,7 +31,6 @@ class Home extends React.Component {
         };
 
     }
-    //Component did update
 
     render() {
 
@@ -54,7 +53,7 @@ class Home extends React.Component {
                         <Row>
                             <Col className={classes.header} md="8">
                                 <p>
-                                    Create your own event or reserve your ticket !
+                                    Reserve your seat NOW !
                             </p>
                             </Col>
                             <Col >
