@@ -28,6 +28,9 @@ function TransparentFooter() {
                         </li>
                     </ul>
                 </nav>
+                <div className="copyright" id="copyright">
+                    © {new Date().getFullYear()}, Designed by{" "} US . Coded by{" "}US.
+                </div>
 
             </Container>
         </footer>

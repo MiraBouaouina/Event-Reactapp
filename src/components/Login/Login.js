@@ -20,7 +20,13 @@ class Login extends React.Component {
 
     state = {
         firstFocus: false,
-        lastFocus: false
+        lastFocus: false,
+        username: "",
+        password: ""
+    }
+    submit() {
+        console.log(this.state);
+
     }
     render() {
 
@@ -50,6 +56,7 @@ class Login extends React.Component {
 
                                         placeholder="Username..."
                                         type="text"
+                                        onChange={(item) => { this.setState({ username: item.target.value }) }}
                                         onFocus={() => this.setState({ firstFocus: true })}
                                         onBlur={() => this.setState({ firstFocus: false })}
                                     ></Input>
@@ -67,6 +74,7 @@ class Login extends React.Component {
                                     <Input
                                         placeholder="Password..."
                                         type="password"
+                                        onChange={(item) => { this.setState({ password: item.target.value }) }}
                                         onFocus={() => this.setState({ lastFocus: true })}
                                         onBlur={() => this.setState({ lastFocus: true })}
                                     ></Input>
@@ -86,7 +94,7 @@ class Login extends React.Component {
                                     className="btn-round btn-neutral"
                                     color="default"
                                     href="#pablo"
-                                    onClick={e => e.preventDefault()}
+                                    onClick={() => { this.submit() }}
                                     size="lg"
                                 >
                                     Get Started

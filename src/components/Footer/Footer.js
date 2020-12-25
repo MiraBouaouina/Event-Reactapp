@@ -4,9 +4,9 @@ import React from "react";
 // reactstrap components
 import { Container } from "reactstrap";
 
-function Footer() {
+const Footer = () => {
     return (
-        <footer className="footer" style={{ backgroundColor: '#434345', color: 'white' }} >
+        <footer className="footer footer-default" >
             <Container>
                 <nav>
                     <ul>
@@ -28,9 +28,12 @@ function Footer() {
                         </li>
                     </ul>
                 </nav>
+                <div className="copyright" id="copyright">
+                    © {new Date().getFullYear()}, Designed by{" "} US. Coded by{" "}US.
+                </div>
 
             </Container>
-        </footer>
+        </footer >
     );
 }
 

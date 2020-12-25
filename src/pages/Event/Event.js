@@ -175,8 +175,7 @@ class Event extends React.Component {
 
                         </Col>
                     </Row>
-                    <div>
-                    </div>
+                    
                 </Container >
                 <Footer />
 

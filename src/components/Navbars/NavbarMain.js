@@ -56,11 +56,11 @@ function NavbarMain() {
               id="navbar-brand"
             >
               <NavLink to="/home" tag={Link}>
-                We Event Together
+                Events Together
                 </NavLink>
             </NavbarBrand>
             <UncontrolledTooltip target="#navbar-brand">
-              Designed by Invision. Coded by Creative Tim
+              Designed by us. Coded by us
             </UncontrolledTooltip>
             <button
               className="navbar-toggler navbar-toggler"

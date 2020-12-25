@@ -18,6 +18,8 @@ import {
 import NavbarSecond from "../../components/Navbars/NavbarSecond";
 import Aboutme from "../../components/Aboutme/Aboutme";
 import Participations from "../../components/Participations/Participations";
+import Footer from "../../components/Footer/Footer";
+
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState('1');
@@ -79,9 +81,7 @@ const Profile = () => {
                                 Participations
                             </NavLink>
                         </NavItem>
-
                     </Nav>
-
 
 
                     <TabContent activeTab={activeTab}>
@@ -96,6 +96,7 @@ const Profile = () => {
                 </div>
 
             </Container>
+            <Footer />
 
         </div >
     );
