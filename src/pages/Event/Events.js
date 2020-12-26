@@ -21,17 +21,22 @@ import Footer from "../../components/Footer/Footer";
 
 
 class Events extends React.Component {
-    state = { activeTab: '1' }
+    state = {
+
+    }
 
 
     render() {
         return (
             <div>
                 <NavbarSecond />
+                <Container className={classes.contenu}>
+                    {/* Sousou you continue here*/}
 
-                <Container>
+
                 </Container >
                 <Footer />
+
 
 
 
