@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Signup.module.css";
 import { Link } from "react-router-dom";
-
+import axios from 'axios';
 import {
     Button,
     Card,
@@ -23,10 +23,32 @@ class Signup extends React.Component {
         lastFocus: false,
         userFocus: false,
         passFocus: false,
-        showPassword: false
+        showPassword: false,
+        user_name: "",
+        pwd: "",
+        first_name: "",
+        last_name: ""
 
     }
+    register() {
+        const user = {
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            user_name: this.state.user_name,
+            pwd: this.state.pwd
 
+        }
+        console.log(user);
+        //post request 
+        axios.post('http://localhost/EventsWebsite-API/user/signup.php', user)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+    }
     handleClickShowPassword = () => {
         this.setState({ showPassword: !this.state.showPassword });
 
@@ -77,8 +99,11 @@ class Signup extends React.Component {
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
+
                                             placeholder="First Name..."
                                             type="text"
+                                            onChange={(item) => { this.setState({ first_name: item.target.value }) }}
+
                                             onFocus={() => this.setState({ firstFocus: true })}
                                             onBlur={() => this.setState({ firstFocus: false })}
                                         ></Input>
@@ -97,6 +122,7 @@ class Signup extends React.Component {
                                         <Input
                                             placeholder="Last Name..."
                                             type="text"
+                                            onChange={(item) => { this.setState({ last_name: item.target.value }) }}
                                             onFocus={() => this.setState({ lastFocus: true })}
                                             onBlur={() => this.setState({ lastFocus: false })}
                                         ></Input>
@@ -115,6 +141,7 @@ class Signup extends React.Component {
                                         <Input
                                             placeholder="Username..."
                                             type="text"
+                                            onChange={(item) => { this.setState({ user_name: item.target.value }) }}
                                             onFocus={() => this.setState({ userFocus: true })}
                                             onBlur={() => this.setState({ userFocus: false })}
                                         ></Input>
@@ -133,6 +160,7 @@ class Signup extends React.Component {
                                         <Input
                                             placeholder="Password..."
                                             type={this.state.showPassword ? 'text' : 'password'}
+                                            onChange={(item) => { this.setState({ pwd: item.target.value }) }}
                                             onFocus={() => this.setState({ passFocus: true })}
                                             onBlur={() => this.setState({ passFocus: false })}
                                         ></Input>
@@ -157,6 +185,8 @@ class Signup extends React.Component {
                                         className="btn-round"
                                         color="info"
                                         size="lg"
+                                        onClick={() => { this.register() }}
+
                                     >
                                         Get Started
                     </Button>

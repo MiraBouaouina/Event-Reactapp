@@ -22,8 +22,11 @@ class Login extends React.Component {
     state = {
         firstFocus: false,
         lastFocus: false,
+        isAuth: false,
         username: "",
         password: ""
+
+
     }
     submit() {
         console.log(this.state);
