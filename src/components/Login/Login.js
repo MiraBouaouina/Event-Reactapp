@@ -31,7 +31,6 @@ class Login extends React.Component {
     submit() {
         console.log(this.state);
         //fetch api here 
-
     }
     render() {
 
