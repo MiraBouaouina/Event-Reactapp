@@ -40,9 +40,7 @@ class Event extends React.Component {
 
                         <i class="fa fa-map-marker orange"></i>
                         <h4>Palo Alto, California.</h4>
-                        <Button className={classes.butt}>
-                            View Profile
-                                </Button>
+                        <Link to="/Event">Show event</Link>
 
                     </div>
 
