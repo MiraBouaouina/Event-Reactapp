@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Events.module.css";
-import classnames from 'classnames';
-import picture from "../../assets/img/event3.jpg";
+import Event from "../../components/Event/Event"
 import {
     Container,
     Row,
@@ -24,6 +23,23 @@ class Events extends React.Component {
     state = {
 
     }
+    //must create event list outside of render else React returns error
+    createEventsTable = () => {
+
+        let table = []
+
+        // Outer loop to create parent
+        for (let i = 0; i < 3; i++) {
+            let children = []
+            //Inner loop to create children
+            for (let j = 0; j < 5; j++) {
+                children.push(<Event />)
+            }
+            //Create the parent and add the children
+            table.push(<tr>{children}</tr>)
+        }
+        return table
+    }
 
 
     render() {
@@ -31,7 +47,10 @@ class Events extends React.Component {
             <div>
                 <NavbarSecond />
                 <Container className={classes.contenu}>
-                    {/* Sousou you continue here*/}
+
+                    <table>
+                        {this.createEventsTable()}
+                    </table>
 
 
                 </Container >
