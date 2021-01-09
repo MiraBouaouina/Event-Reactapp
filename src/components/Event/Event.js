@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import classes from "../../pages/Event/Event.module.css";
+import ShowEvent from "./ShowEvent";
 import classnames from 'classnames';
 import picture from "../../assets/img/event3.jpg";
 import {
+    Modal,
     Container,
     Row,
     Col,
@@ -15,20 +17,21 @@ import {
     NavLink
 } from "reactstrap";
 
-class Event extends React.Component {
-     constructor(props) {
-     super(props);
-     console.log(props); 
-    }
+ 
 
-    toEvent(data) {
+const Event =(props) =>{
+     
+     console.log(props); 
+     const [modal2, setModal2] = React.useState(false);
+    
+
+    /*toEvent(data) {
         //this.props.loadEvent(data);
         //return 
           // ( <Redirect to="/event" />)
         
-    }
+    }*/
 
-    render() {
         return (
             <div>
 
@@ -39,16 +42,30 @@ class Event extends React.Component {
                     <div className={classes.owner}>
 
                         <h5>
-                             {this.props.data.event_name}
+                             {props.data.event_name}
                         </h5>
 
                         <i class="fas fa-calendar-week "></i>
-                        <h4> {this.props.data.start_date}  {this.props.data.end_date}</h4>
+                        <h4> {props.data.start_date}  {props.data.end_date}</h4>
 
                         <i class="fa fa-map-marker orange"></i>
-                        <h4> {this.props.data.place}</h4>
+                        <h4> {props.data.place}</h4>
+                        <Button onClick={() => setModal2(true)}
+                          id="show-event">
+                         Show event
+                          <p className="d-lg-none d-xl-none">Create an event</p>
+                        </Button>
+                
+                         
+                          <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                            toggle={() => setModal2(false)}
+                            isOpen={modal2}
+                          >
 
-                        <button onClick={this.toEvent(this.props.data)}> Show event</button>
+                            <ShowEvent event={props.data}/>
+
+                          </Modal>
+                        
                         
                    
 
@@ -61,7 +78,7 @@ class Event extends React.Component {
 
             </div >
         );
-    }
+    
 
 
 }
