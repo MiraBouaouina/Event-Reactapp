@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Login.module.css";
-import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Link, BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -32,9 +32,9 @@ class LoginPage extends React.Component {
         }
 
     }
-    
+
     submit() {
-         const user = {
+        const user = {
             user_name: this.state.user_name,
             pwd: this.state.pwd
         }
@@ -42,13 +42,13 @@ class LoginPage extends React.Component {
         console.log(user);
         axios.post('http://localhost/eventsWebSite-api/user/signin.php', user)
             .then(response => {
-            console.log(response);
-            let data = response.data;
-            if(data.id){
-                console.log('loading user...');
-               this.props.loadUser(data);
-               this.setState({ redirectToEvents: true });
-           }
+                console.log(response);
+                let data = response.data;
+                if (data.id) {
+                    console.log('loading user...');
+                    this.props.loadUser(data);
+                    this.setState({ redirectToEvents: true });
+                }
             })
             .catch(error => {
                 console.log(error)
@@ -56,14 +56,14 @@ class LoginPage extends React.Component {
     }
     render() {
         const redirectToEvents = this.state.redirectToEvents;
-        if (redirectToEvents===true) {
-               return <Redirect to="/Events" />
-            }
+        if (redirectToEvents === true) {
+            return <Redirect to="/events" />
+        }
 
         return (
 
             <>
-                <NavbarSecond user={this.props.user}/>
+                <NavbarSecond user={this.props.user} />
                 <Row>
                     <Card className="card-signup" style={{ backgroundColor: '#a8a7a7' }}> {/*95b3b8 aaaaaa*/}
                         < Form action="" className="form" method="">
