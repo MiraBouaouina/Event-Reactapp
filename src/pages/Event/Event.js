@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./Event.module.css";
 import classnames from 'classnames';
 import picture from "../../assets/img/event3.jpg";
+import axios from 'axios';
 import {
     Container,
     Row,
@@ -21,7 +22,30 @@ import Footer from "../../components/Footer/Footer";
 
 
 class Event extends React.Component {
-    state={activeTab:'1'}
+    constructor(props) {
+        super(props);
+        this.state={
+            activeTab:'1',
+            event : []
+        };
+    }
+
+
+    //must create event list outside of render else React returns error
+    componentDidMount(){
+        console.log(this.props);
+        //let id = this.props.match.params.id//.replace(':', '');
+        axios.post('http://localhost/eventsWebSite-api/event/fetch.php', this.props.states.event)
+            .then(response => {
+                this.setState({event: response.data});
+                console.log(this.state.event);
+                })
+            .catch(error => {
+                console.log(error)
+                })
+    }
+ 
+
 
      toggle = (tab) => {
         if (this.state.activeTab !== tab) this.setState({activeTab:tab});
@@ -35,14 +59,14 @@ class Event extends React.Component {
                    <div className={classes.infoContainer}>
                    <div  >
                         <h1 className={classes.title}>
-                            GREEN NIGHT
+                            {this.state.event.event_name}
                         </h1>
     
                         <i class="fas fa-calendar-week "></i>
-                        <h4>August 3rd to 7th</h4>
+                        <h4>{this.state.event.start_date}</h4>
     
                         <i class="fa fa-map-marker orange"></i>
-                        <h4>Palo Alto, California.</h4>
+                        <h4>{this.state.event.end_date}</h4>
                         <Row>
                             <Col>
                                 <Col >

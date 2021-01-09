@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import classes from "../../pages/Event/Event.module.css";
 import classnames from 'classnames';
 import picture from "../../assets/img/event3.jpg";
@@ -16,31 +16,41 @@ import {
 } from "reactstrap";
 
 class Event extends React.Component {
-    state = { activeTab: '1' }
-
-    toggle = (tab) => {
-        if (this.state.activeTab !== tab) this.setState({ activeTab: tab });
+     constructor(props) {
+     super(props);
+     console.log(props); 
     }
+
+    toEvent(data) {
+        //this.props.loadEvent(data);
+        //return 
+          // ( <Redirect to="/event" />)
+        
+    }
+
     render() {
         return (
             <div>
-
 
                 <Container>
 
 
 
                     <div className={classes.owner}>
+
                         <h5>
-                            GREEN NIGHT
+                             {this.props.data.event_name}
                         </h5>
 
                         <i class="fas fa-calendar-week "></i>
-                        <h4>August 3rd to 7th</h4>
+                        <h4> {this.props.data.start_date}  {this.props.data.end_date}</h4>
 
                         <i class="fa fa-map-marker orange"></i>
-                        <h4>Palo Alto, California.</h4>
-                        <Link to="/Event">Show event</Link>
+                        <h4> {this.props.data.place}</h4>
+
+                        <button onClick={this.toEvent(this.props.data)}> Show event</button>
+                        
+                   
 
                     </div>
 

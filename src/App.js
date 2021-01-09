@@ -19,7 +19,10 @@ class App extends React.Component {
                 last_name: "",
                 user_name: "",
                 admin: ""
-                }
+                },
+            event: {
+                id:""
+            }
         }
     }
 
@@ -33,6 +36,12 @@ loadUser = (data) => {
     }});
 }
 
+/*loadEvent = (data) => {
+    this.setState({event: {
+        id: data.id,      
+    }});
+}*/
+
     render() {
         return (
 
@@ -41,8 +50,8 @@ loadUser = (data) => {
                     <Route path="/home" render={() => <Home loadUser={this.loadUser} user={this.state.user}/>} />
                     <Route path="/signup" render={() => <Signup loadUser={this.loadUser} />} />
                     <Route path="/profile" render={() => <Profile user={this.state.user} />} />
-                    <Route path="/event" render={() => <Event user={this.state.user}/>} />
-                    <Route path="/events" render={() => <Events user={this.state.user}/>} />
+                    <Route path="/event" render={()=> <Event states={this.state} loadEvent={this.loadEvent} />} />
+                    <Route path="/events" render={() => <Events states={this.state} loadEvent={this.loadEvent}/>} />
                     <Route path="/login" render={() => <LoginPage loadUser={this.loadUser} user={this.state.user}/>} />
 
 

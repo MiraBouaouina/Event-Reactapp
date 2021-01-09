@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Events.module.css";
-import Event from "../../components/Event/Event"
+import Event from "../../components/Event/Event";
+import axios from 'axios';
 import {
     Container,
     Row,
@@ -20,33 +21,44 @@ import Footer from "../../components/Footer/Footer";
 
 
 class Events extends React.Component {
-    state = {
-
+     constructor(props) {
+        super(props);
+        this.state= {
+            events:[]
+        }
     }
     //must create event list outside of render else React returns error
-    createEventsTable = () => {
-
-        let table = []
-
-        // Outer loop to create parent
-        for (let i = 0; i < 3; i++) {
-            let children = []
-            //Inner loop to create children
-            for (let j = 0; j < 5; j++) {
-                children.push(<Event />)
-            }
-            //Create the parent and add the children
-            table.push(<tr>{children}</tr>)
-        }
-        return table
+    componentDidMount(){
+        axios.get('http://localhost/eventsWebSite-api/event/fetch_all.php')
+            .then(response => {
+                this.setState({events: response.data});
+                })
+            .catch(error => {
+                console.log(error)
+                })
     }
+    createEventsTable(){
+        let table=[];
+        let data= [];
+        
+        data = this.state.events;       
 
+            data.map( (event) => {
+                table.push(<tr><Event data={event} loadEvent={this.props.loadEvent} /> </tr>);
 
+            })
+            return table;
+                    
+               
+        
+    }
+        
     render() {
         return (
             <div>
                 <NavbarSecond />
                 <Container className={classes.contenu}>
+
 
                     <table>
                         {this.createEventsTable()}
@@ -55,10 +67,6 @@ class Events extends React.Component {
 
                 </Container >
                 <Footer />
-
-
-
-
             </div >
         );
     }

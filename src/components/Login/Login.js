@@ -37,8 +37,6 @@ class Login extends React.Component {
             user_name: this.state.user_name,
             pwd: this.state.pwd
         }
-
-        console.log(user);
         axios.post('http://localhost/eventsWebSite-api/user/signin.php', user)
             .then(response => {
             let data = response.data;
