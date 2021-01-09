@@ -30,6 +30,10 @@ class Login extends React.Component {
             password: ""
         }
 
+                console.log("---------login BEFORE--------");
+               console.log(this.props);
+               console.log("-----------------");
+
     }
     
     submit() {
@@ -40,9 +44,16 @@ class Login extends React.Component {
         axios.post('http://localhost/eventsWebSite-api/user/signin.php', user)
             .then(response => {
             let data = response.data;
-            if(data.id){
+                console.log("---------login DATA FROM AXIOS RESPONSE--------");
+               console.log(data);
+               console.log("--------------------------------------");
+            if(true){
                this.props.loadUser(data);
                this.setState({ redirectToEvents: true });
+               console.log("---------login AFTER--------");
+               console.log(this.props);
+               console.log("-----------------");
+
            }
             })
             .catch(error => {

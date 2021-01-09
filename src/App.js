@@ -7,6 +7,7 @@ import Profile from "./pages/Profile/Profile";
 import Event from "./pages/Event/Event";
 import Events from "./pages/Event/Events";
 import LoginPage from "./pages/Login/LoginPage";
+import Login from "./components/Login/Login";
 
 
 class App extends React.Component {
@@ -19,10 +20,7 @@ class App extends React.Component {
                 last_name: "",
                 user_name: "",
                 admin: ""
-                },
-            event: {
-                id:""
-            }
+                }
         }
     }
 
@@ -36,23 +34,18 @@ loadUser = (data) => {
     }});
 }
 
-/*loadEvent = (data) => {
-    this.setState({event: {
-        id: data.id,      
-    }});
-}*/
 
     render() {
         return (
 
             <BrowserRouter>
                 <Switch>
-                    <Route path="/home" render={() => <Home loadUser={this.loadUser} user={this.state.user}/>} />
-                    <Route path="/signup" render={() => <Signup loadUser={this.loadUser} />} />
-                    <Route path="/profile" render={() => <Profile user={this.state.user} />} />
-                    <Route path="/event" render={()=> <Event states={this.state} loadEvent={this.loadEvent} />} />
-                    <Route path="/events" render={() => <Events states={this.state} loadEvent={this.loadEvent}/>} />
-                    <Route path="/login" render={() => <LoginPage loadUser={this.loadUser} user={this.state.user}/>} />
+                    <Route path="/home" render={(props) => <Home {...props} loadUser={this.loadUser} user={this.state.user}/>} />
+                    <Route path="/signup" render={(props) => <Signup {...props} loadUser={this.loadUser} />} />
+                    <Route path="/profile" render={(props) => <Profile {...props} user={this.state.user} />} />
+                    <Route path="/event" render={(props)=> <Event {...props} states={this.state} loadEvent={this.loadEvent} />} />
+                    <Route path="/events" render={(props) => <Events {...props} states={this.state} loadUser={this.loadUser}/>} />
+                    <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} states={this.state}/>} />
 
 
                     <Redirect to="/home" />

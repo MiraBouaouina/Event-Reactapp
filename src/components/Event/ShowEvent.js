@@ -24,6 +24,7 @@ class ShowEvent extends React.Component {
         };
         console.log("------IN SHOW EVENTS------");
         console.log(props);
+        console.log("--------------------------");
     }
 
 

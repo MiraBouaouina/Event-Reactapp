@@ -21,7 +21,6 @@ import {
 
 const Event =(props) =>{
      
-     console.log(props); 
      const [modal2, setModal2] = React.useState(false);
     
 

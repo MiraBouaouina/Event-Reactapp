@@ -26,6 +26,10 @@ class Events extends React.Component {
         this.state= {
             events:[]
         }
+
+        console.log("-------------EVENTS--------------");
+        console.log(this.props);
+        console.log("--------------------------------");
     }
     //must create event list outside of render else React returns error
     componentDidMount(){
@@ -56,7 +60,7 @@ class Events extends React.Component {
     render() {
         return (
             <div>
-                <NavbarSecond />
+                <NavbarSecond user={this.props.states.user} loadUser={this.props.loadUser}/>
                 <Container className={classes.contenu}>
 
 

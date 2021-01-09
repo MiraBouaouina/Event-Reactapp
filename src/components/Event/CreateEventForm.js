@@ -42,8 +42,10 @@ class CreateEventForm extends React.Component {
             description: this.state.description,
             creator_id: this.props.user.id
         }
-
+        console.log("--------CREATE EVENT FORM--------------");
         console.log(this.props);
+        console.log("---------------------------------------");
+
 
         console.log(event);
         //post request 

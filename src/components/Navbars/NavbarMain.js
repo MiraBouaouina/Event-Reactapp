@@ -78,13 +78,13 @@ const NavbarMain=(props) => {
               <span className="navbar-toggler-bar bottom-bar"></span>
             </button>
           </div>
-          <Collapse
+         <Collapse
             className="justify-content-end"
             isOpen={collapseOpen}
             navbar
           >
             <Nav navbar>
-              <NavItem className={classes.nvitem}>
+              {/* <NavItem className={classes.nvitem}>
 
                 <NavLink onClick={() => setModal2(true)}
                   id="create-event">
@@ -101,7 +101,7 @@ const NavbarMain=(props) => {
                 <CreateEventForm user={props.user}/>
 
               </Modal>
-
+            */}
               <NavItem>
                 <NavLink to="/home" tag={Link}>
                   Home

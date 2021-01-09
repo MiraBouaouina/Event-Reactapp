@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Login from "../Login/Login.js";
 import classes from "./NavbarSecond.module.css";
 import CreateEventForm from "../Event/CreateEventForm";
 import {
+     Button,
     Modal,
     UncontrolledTooltip,
     Collapse,
@@ -15,12 +16,58 @@ import {
     Container
 } from "reactstrap";
 
-function NavbarSecond(props) {
-    const [modal1, setModal1] = React.useState(false);
-    const [modal2, setModal2] = React.useState(false);
-    const [collapseOpen, setCollapseOpen] = React.useState(false);
+class NavbarSecond extends React.Component {
 
-    return (
+     constructor(props) {
+        super(props);
+        this.state = {
+            toHome: false,
+            modal2:false,
+            collapseOpen:false
+        };
+
+        console.log("---------NAV BAR SECOND ENTER--------");
+        console.log(this.props.user);
+        console.log("--------------------------------");
+    }
+
+setModalhandler(){
+    this.setState({
+        modal2:true
+    })
+}
+setCollapsehandler(){
+    this.setState({
+        collapseOpen:!this.state.collapseOpen
+
+    })
+}
+
+
+   signOut(){
+         let user={ 
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
+        this.props.loadUser(user);
+        this.setState({toHome:true});
+
+        console.log("---------NAV BAR SECOND LEAVE--------");
+        console.log(this.props.user);
+        console.log("--------------------------------");
+
+    }
+    
+    render(){
+        
+        if (this.state.toHome){
+        
+        return <Redirect to="/Home"/>
+        }
+        return (
         <>
 
             <Navbar className={classes.navb} expand="lg" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -43,37 +90,47 @@ function NavbarSecond(props) {
                         className="navbar-toggler navbar-toggler"
                         onClick={() => {
                             document.documentElement.classList.toggle("nav-open");
-                            setCollapseOpen(!collapseOpen);
+                            this.setCollapsehandler();
                         }}
-                        aria-expanded={collapseOpen}
+                        aria-expanded={this.state.collapseOpen}
                         type="button"
                     >
                         <i className="fas fa-bars" style={{ color: 'white' }}></i>
                     </button>
                     <Collapse
                         className="justify-content-end"
-                        isOpen={collapseOpen}
+                        isOpen={this.state.collapseOpen}
                         navbar
                     >
                         <Nav navbar>
+                            if (this.props.user.admin) 
+                            {
+                            <>
 
-                        <NavItem className={classes.nvitem}>
+                            <NavItem className={classes.nvitem}>
 
-                        <NavLink onClick={() => setModal2(true)}
-                          id="create-event">
-                         Create an event
-                          <p className="d-lg-none d-xl-none">Create an event</p>
-                        </NavLink>
+                            <NavLink onClick={() => this.setModalhandler()}
+                              id="create-event">
+                             
+                              <p className="d-lg-none d-xl-none">Create an event</p>
+                            </NavLink>
+                            
+                          </NavItem>
+                          <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                            toggle={() => this.setModalhandler()}
+                            isOpen={this.state.modal2}
+                          >
+
+                            <CreateEventForm user={this.props.user} />
+
+                          </Modal>
+
+                          </>
+
+                          }
+
                         
-                      </NavItem>
-                      <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                        toggle={() => setModal2(false)}
-                        isOpen={modal2}
-                      >
-
-                        <CreateEventForm user={props.user} />
-
-                      </Modal>
+                        
                             <NavItem>
                                 <NavLink to="/home" tag={Link}>
                                     Home
@@ -85,22 +142,11 @@ function NavbarSecond(props) {
                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={() => setModal1(true)}
-                                    id="sign-in">
-                                    <i className="now-ui-icons users_circle-08"></i>
-                                    <p className="d-lg-none d-xl-none">Sign in</p>
+                                <NavLink onClick={() => this.signOut()}>
+                                    Sign Out
                                 </NavLink>
-                                <UncontrolledTooltip target="#sign-in">
-                                    Sign in
-                      </UncontrolledTooltip>
+    
                             </NavItem>
-                            <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                                toggle={() => setModal1(false)}
-                                isOpen={modal1}
-                            >
-
-                                <Login loadUser={props.loadUser}/>
-                            </Modal>
 
                         </Nav>
                     </Collapse>
@@ -110,4 +156,5 @@ function NavbarSecond(props) {
     );
 }
 
+}
 export default NavbarSecond;
