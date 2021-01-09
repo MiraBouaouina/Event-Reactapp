@@ -14,8 +14,8 @@ import {
 import TransparentFooter from "../../components/Footer/TransparentFooter";
 import NavbarMain from "../../components/Navbars/NavbarMain";
 class Home extends React.Component {
-    state = {
-
+     constructor(props) {
+        super(props);
     }
     //Component did mount
 
@@ -37,7 +37,7 @@ class Home extends React.Component {
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff"> {/*9933ff*/}
-                <NavbarMain />
+                <NavbarMain loadUser={this.props.loadUser}/>
                 <div
                     className="page-header-image"
                     style={{

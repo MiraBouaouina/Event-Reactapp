@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Signup.module.css";
-import { Link } from "react-router-dom";
+import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -18,7 +18,9 @@ import {
 } from "reactstrap";
 
 class Signup extends React.Component {
-    state = {
+    constructor(props) {
+        super(props);
+        this.state = {
         firstFocus: false,
         lastFocus: false,
         userFocus: false,
@@ -27,7 +29,9 @@ class Signup extends React.Component {
         user_name: "",
         pwd: "",
         first_name: "",
-        last_name: ""
+        last_name: "",
+        redirectToSignIn: false
+        }
 
     }
     register() {
@@ -38,11 +42,10 @@ class Signup extends React.Component {
             pwd: this.state.pwd
 
         }
-        console.log(user);
         //post request 
-        axios.post('http://localhost/EventsWebsite-API/user/signup.php', user)
+        axios.post('http://localhost/eventsWebSite-api/user/signup.php', user)
             .then(response => {
-                console.log(response)
+               this.setState({ redirectToSignIn: true });
             })
             .catch(error => {
                 console.log(error)
@@ -66,7 +69,10 @@ class Signup extends React.Component {
 
     }
     render() {
-
+        const redirectToSignIn = this.state.redirectToSignIn;
+        if (redirectToSignIn===true) {
+               return <Redirect to="/Login" />
+            }
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff">
@@ -168,7 +174,7 @@ class Signup extends React.Component {
                                             <InputGroupText style={{ padding: "15px 16px 15px" }}>
                                                 <i
 
-                                                    class={this.state.showPassword ? 'far fa-eye-slash' : 'fa fa-eye'}
+                                                    className={this.state.showPassword ? 'far fa-eye-slash' : 'fa fa-eye'}
                                                     onClick={this.handleClickShowPassword}
 
                                                 >
@@ -206,7 +212,6 @@ class Signup extends React.Component {
                     </Col>
                 </Container>
             </div >
-
         );
     }
 }

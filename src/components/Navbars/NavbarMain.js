@@ -15,7 +15,7 @@ import {
   Container
 } from "reactstrap";
 
-function NavbarMain() {
+const NavbarMain=(props) => {
   const [modal1, setModal1] = React.useState(false);
   const [modal2, setModal2] = React.useState(false);
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -127,7 +127,7 @@ function NavbarMain() {
                 isOpen={modal1}
               >
 
-                <Login />
+                <Login loadUser={props.loadUser}/>
 
               </Modal>
 

@@ -16,9 +16,10 @@ import {
     InputGroup,
     Row
 } from "reactstrap";
+import NavbarSecond from "../../components/Navbars/NavbarSecond";
+import Footer from "../../components/Footer/Footer";
 
-class Login extends React.Component {
-
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,7 +42,6 @@ class Login extends React.Component {
         console.log(user);
         axios.post('http://localhost/eventsWebSite-api/user/signin.php', user)
             .then(response => {
-            console.log("-----------------response-------------------");
             console.log(response);
             let data = response.data;
             if(data.id){
@@ -63,6 +63,7 @@ class Login extends React.Component {
         return (
 
             <>
+                <NavbarSecond />
                 <Row>
                     <Card className="card-signup" style={{ backgroundColor: '#a8a7a7' }}> {/*95b3b8 aaaaaa*/}
                         < Form action="" className="form" method="">
@@ -141,4 +142,5 @@ class Login extends React.Component {
     }
 
 }
-export default Login;
+
+export default LoginPage;
