@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Login from "../Login/Login.js";
 import classes from "./NavbarSecond.module.css";
+import CreateEventForm from "../Event/CreateEventForm";
 import {
     Modal,
     UncontrolledTooltip,
@@ -16,6 +17,7 @@ import {
 
 function NavbarSecond() {
     const [modal1, setModal1] = React.useState(false);
+    const [modal2, setModal2] = React.useState(false);
     const [collapseOpen, setCollapseOpen] = React.useState(false);
 
     return (
@@ -54,6 +56,24 @@ function NavbarSecond() {
                         navbar
                     >
                         <Nav navbar>
+
+                        <NavItem className={classes.nvitem}>
+
+                        <NavLink onClick={() => setModal2(true)}
+                          id="create-event">
+                         Create an event
+                          <p className="d-lg-none d-xl-none">Create an event</p>
+                        </NavLink>
+                        
+                      </NavItem>
+                      <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                        toggle={() => setModal2(false)}
+                        isOpen={modal2}
+                      >
+
+                        <CreateEventForm />
+
+                      </Modal>
                             <NavItem>
                                 <NavLink to="/home" tag={Link}>
                                     Home

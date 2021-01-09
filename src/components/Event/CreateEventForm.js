@@ -78,13 +78,13 @@ class CreateEventForm extends React.Component {
                 ></div>
 
                 <Container>
-                    <Col className="ml-auto mr-auto" md="4">
+                    <Col className="ml-auto mr-auto" md="12">
                         <Card className="card-login card-plain">
                             <Form action="" className="form" method="">
                                 <CardHeader >
-                                    <h1>
+                                    <h2>
                                         Create Event
-                                </h1>
+                                </h2>
                                 </CardHeader>
                                 <CardBody>
                                     <InputGroup
@@ -138,6 +138,7 @@ class CreateEventForm extends React.Component {
                                                 <i className="now-ui-icons text_caps-small"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
+
                                         <Input
                                             placeholder="End Date..."
                                             type="text"
@@ -152,27 +153,25 @@ class CreateEventForm extends React.Component {
                                             (this.state.passFocus ? " input-group-focus" : "")
                                         }
                                     >
-                                        <InputGroupAddon addonType="prepend">
-                                            <InputGroupText>
-                                                <i className="now-ui-icons ui-1_lock-circle-open"></i>
-                                            </InputGroupText>
-                                        </InputGroupAddon>
+                                       
+
+                                        <InputGroup>
                                         <Input
                                             placeholder="Place..."
                                             onChange={(item) => { this.setState({ place: item.target.value }) }}
                                             onFocus={() => this.setState({ passFocus: true })}
                                             onBlur={() => this.setState({ passFocus: false })}
                                         ></Input>
+                                        </InputGroup>
 
-                                        <Input
+                                        <InputGroup>
+                                        <Input type="textarea"
                                             placeholder="Description..."
                                             onChange={(item) => { this.setState({ description: item.target.value }) }}
                                             onFocus={() => this.setState({ passFocus: true })}
                                             onBlur={() => this.setState({ passFocus: false })}
                                         ></Input>
-
-
-
+                                        </InputGroup>
                                     </InputGroup>
                                 </CardBody>
                                 <CardFooter >
@@ -184,18 +183,9 @@ class CreateEventForm extends React.Component {
                                         onClick={() => { this.register() }}
 
                                     >
-                                        Get Started
+                                        Create Event
                     </Button>
-                                    <div className="pull-left">
-                                        <h6>
-                                            <Link
-                                                className="link"
-                                                to="/home"                                        >
-                                                Go back
-                                        </Link>
-                                        </h6>
-                                    </div>
-
+                                  
                                 </CardFooter>
                             </Form>
                         </Card>
