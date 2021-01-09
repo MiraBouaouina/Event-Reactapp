@@ -63,7 +63,7 @@ class LoginPage extends React.Component {
         return (
 
             <>
-                <NavbarSecond />
+                <NavbarSecond user={this.props.user}/>
                 <Row>
                     <Card className="card-signup" style={{ backgroundColor: '#a8a7a7' }}> {/*95b3b8 aaaaaa*/}
                         < Form action="" className="form" method="">

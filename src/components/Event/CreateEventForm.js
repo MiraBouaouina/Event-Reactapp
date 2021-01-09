@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -17,20 +17,22 @@ import {
 } from "reactstrap";
 
 class CreateEventForm extends React.Component {
-    state = {
-        firstFocus: false,
-        lastFocus: false,
-        userFocus: false,
-        passFocus: false,
-        showPassword: false,
-        event_name: "",
-        start_date: "",
-        end_date: "",
-        place: "",
-        description: "",
-        creator_id: ""
-
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstFocus: false,
+            lastFocus: false,
+            userFocus: false,
+            passFocus: false,
+            showPassword: false,
+            event_name: "",
+            start_date: "",
+            end_date: "",
+            place: "",
+            description: "",
+            redirectToEvents: false
+           }
+        }
     create() {
         const event = {
             event_name: this.state.event_name,
@@ -38,14 +40,17 @@ class CreateEventForm extends React.Component {
             end_date: this.state.end_date,
             place: this.state.place,
             description: this.state.description,
-            //creator_id: this.props.creator_id
-
+            creator_id: this.props.user.id
         }
 
+        console.log(this.props);
+
+        console.log(event);
         //post request 
-        axios.post('http://localhost/EventsWebsite-API/event/signup.php', event) //CHNAGE THIS
+        axios.post('http://localhost/eventsWebSite-api/event/create.php', event) //CHNAGE THIS
             .then(response => {
                 console.log(response)
+                this.setState({ redirectToEvents: true });
             })
             .catch(error => {
                 console.log(error)
@@ -66,7 +71,10 @@ class CreateEventForm extends React.Component {
 
     }
     render() {
-
+        const redirectToEvents = this.state.redirectToEvents;
+        if (redirectToEvents===true) {
+               return <Redirect to="/Events"/>
+            }
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff">
@@ -180,7 +188,7 @@ class CreateEventForm extends React.Component {
                                         className="btn-round"
                                         color="info"
                                         size="lg"
-                                        onClick={() => { this.register() }}
+                                        onClick={() => { this.create() }}
 
                                     >
                                         Create Event

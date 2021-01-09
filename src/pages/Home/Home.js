@@ -37,7 +37,7 @@ class Home extends React.Component {
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff"> {/*9933ff*/}
-                <NavbarMain loadUser={this.props.loadUser}/>
+                <NavbarMain loadUser={this.props.loadUser} user={this.props.user}/>
                 <div
                     className="page-header-image"
                     style={{

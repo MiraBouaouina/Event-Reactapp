@@ -98,7 +98,7 @@ const NavbarMain=(props) => {
                 isOpen={modal2}
               >
 
-                <CreateEventForm />
+                <CreateEventForm user={props.user}/>
 
               </Modal>
 

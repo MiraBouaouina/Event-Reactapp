@@ -41,11 +41,8 @@ class Login extends React.Component {
         console.log(user);
         axios.post('http://localhost/eventsWebSite-api/user/signin.php', user)
             .then(response => {
-            console.log("-----------------response-------------------");
-            console.log(response);
             let data = response.data;
             if(data.id){
-                console.log('loading user...');
                this.props.loadUser(data);
                this.setState({ redirectToEvents: true });
            }
@@ -57,7 +54,7 @@ class Login extends React.Component {
     render() {
         const redirectToEvents = this.state.redirectToEvents;
         if (redirectToEvents===true) {
-               return <Redirect to="/Events" />
+               return <Redirect to="/Events"/>
             }
 
         return (

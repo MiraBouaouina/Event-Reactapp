@@ -15,7 +15,7 @@ import {
     Container
 } from "reactstrap";
 
-function NavbarSecond() {
+function NavbarSecond(props) {
     const [modal1, setModal1] = React.useState(false);
     const [modal2, setModal2] = React.useState(false);
     const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -71,7 +71,7 @@ function NavbarSecond() {
                         isOpen={modal2}
                       >
 
-                        <CreateEventForm />
+                        <CreateEventForm user={props.user} />
 
                       </Modal>
                             <NavItem>
@@ -99,8 +99,7 @@ function NavbarSecond() {
                                 isOpen={modal1}
                             >
 
-                                <Login />
-
+                                <Login loadUser={props.loadUser}/>
                             </Modal>
 
                         </Nav>

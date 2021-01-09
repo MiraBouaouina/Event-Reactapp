@@ -38,12 +38,12 @@ loadUser = (data) => {
 
             <BrowserRouter>
                 <Switch>
-                    <Route path="/home" render={() => <Home loadUser={this.loadUser} />} />
+                    <Route path="/home" render={() => <Home loadUser={this.loadUser} user={this.state.user}/>} />
                     <Route path="/signup" render={() => <Signup loadUser={this.loadUser} />} />
-                    <Route path="/profile" render={() => <Profile loadUser={this.loadUser} />} />
-                    <Route path="/event" render={() => <Event />} />
-                    <Route path="/events" render={() => <Events />} />
-                    <Route path="/login" render={() => <LoginPage loadUser={this.loadUser} />} />
+                    <Route path="/profile" render={() => <Profile user={this.state.user} />} />
+                    <Route path="/event" render={() => <Event user={this.state.user}/>} />
+                    <Route path="/events" render={() => <Events user={this.state.user}/>} />
+                    <Route path="/login" render={() => <LoginPage loadUser={this.loadUser} user={this.state.user}/>} />
 
 
                     <Redirect to="/home" />
