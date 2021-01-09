@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Signup.module.css";
-import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Link, BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -21,16 +21,16 @@ class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        firstFocus: false,
-        lastFocus: false,
-        userFocus: false,
-        passFocus: false,
-        showPassword: false,
-        user_name: "",
-        pwd: "",
-        first_name: "",
-        last_name: "",
-        redirectToSignIn: false
+            firstFocus: false,
+            lastFocus: false,
+            userFocus: false,
+            passFocus: false,
+            showPassword: false,
+            user_name: "",
+            pwd: "",
+            first_name: "",
+            last_name: "",
+            redirectToSignIn: false
         }
 
     }
@@ -45,7 +45,7 @@ class Signup extends React.Component {
         //post request 
         axios.post('http://localhost/eventsWebSite-api/user/signup.php', user)
             .then(response => {
-               this.setState({ redirectToSignIn: true });
+                this.setState({ redirectToSignIn: true });
             })
             .catch(error => {
                 console.log(error)
@@ -70,9 +70,9 @@ class Signup extends React.Component {
     }
     render() {
         const redirectToSignIn = this.state.redirectToSignIn;
-        if (redirectToSignIn===true) {
-               return <Redirect to="/Login" />
-            }
+        if (redirectToSignIn === true) {
+            return <Redirect to="/login" />
+        }
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff">
@@ -199,7 +199,7 @@ class Signup extends React.Component {
                                     <div className="pull-left">
                                         <h6>
                                             <Link
-                                                className="link"
+                                                compon className="link"
                                                 to="/home"                                        >
                                                 Go back
                                         </Link>
