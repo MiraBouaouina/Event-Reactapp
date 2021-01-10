@@ -16,11 +16,11 @@ const Aboutme = (props) => {
                 </Col>
 
                 <Col xs="3" >
-                    <h4>Email:</h4>
+                    <h4>First Name:</h4>
 
                 </Col>
                 <Col xs="6">
-                    <h4>{props.email} </h4>
+                    <h4>{props.first_name} </h4>
                 </Col>
             </Row>
 
@@ -30,26 +30,11 @@ const Aboutme = (props) => {
                 </Col>
 
                 <Col xs="3">
-                    <h4>Phone:</h4>
+                    <h4>Last Name:</h4>
 
                 </Col>
                 <Col xs="6">
-                    <h4>{props.phone} </h4>
-                </Col>
-            </Row>
-
-            <Row >
-
-                <Col xs="3" className={classes.icon}>
-                    <i class="fab fa-facebook"></i>
-                </Col>
-
-                <Col xs="3">
-                    <h4>Account:</h4>
-
-                </Col>
-                <Col xs="6">
-                    <h4>{props.fbaccount} </h4>
+                    <h4>{props.last_name} </h4>
                 </Col>
             </Row>
 

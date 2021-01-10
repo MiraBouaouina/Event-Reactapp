@@ -37,7 +37,10 @@ class Event extends React.Component {
                 admin: ""
                 };
 
-     this.buttons = <> </>;
+     this.buttons = <Button onClick={() => this.setState({modal2:true})}
+                          id="show-event">
+                         Show event
+                        </Button>;
      let check = window.localStorage.getItem('user');
         check = JSON.parse(check);         
                 this.user.id= check.id;

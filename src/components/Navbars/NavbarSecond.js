@@ -63,7 +63,7 @@ componentDidMount() {
               ;
 
         if(this.user.id) {
-
+            if(this.user.admin) {
               this.eventCreateButton =          
               <>
               <NavItem className={classes.nvitem}>
@@ -77,6 +77,7 @@ componentDidMount() {
               </NavItem>
               
               </>;
+          }
 
               this.signToggle= <>
                                 <NavItem>
@@ -87,7 +88,6 @@ componentDidMount() {
 
                                 <NavItem>
                                   <NavLink to="/profile" tag={Link}>
-                                    >
                                     <i className="now-ui-icons users_circle-08"></i>
                                     <p className="d-lg-none d-xl-none">Profile</p>
                                   </NavLink>

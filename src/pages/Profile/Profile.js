@@ -61,17 +61,8 @@ const Profile = (props) => {
                         </Col>
                         <Col md="8" xs="8" style={{ marginTop: "20px" }}>
                             <h3>
-                                {user.first_name} {user.last_name} 
-                            </h3>
-                            <h5>
                                 {user.user_name}
-                            </h5>
-
-                            <Button style={{
-                                backgroundColor: "#2c2c2c"
-                            }} size="sm">
-                                Edit
-                            </Button>
+                            </h3>
                         </Col>
                     </Row>
                 </div>
@@ -84,7 +75,7 @@ const Profile = (props) => {
                                 className={classnames({ active: activeTab === '1' })}
                                 onClick={() => { toggle('1'); }}
                             >
-                                Contact
+                                Infos
                             </NavLink>
                         </NavItem>
 
@@ -103,7 +94,7 @@ const Profile = (props) => {
 
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
-                            <Aboutme email="mira@gmail.com" phone="50605161" fbaccount="Mira Bouaouina" />
+                            <Aboutme first_name={user.first_name} last_name={user.last_name}/>
                         </TabPane>
                         <TabPane tabId="2">
                             <Participations />

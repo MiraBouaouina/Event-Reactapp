@@ -53,6 +53,7 @@ class NavbarMain extends React.Component {
         this.user.admin= check.admin;
 
         if(this.user.id) {
+            if(this.user.admin) {
 
               this.eventCreateButton =          
               <>
@@ -67,6 +68,7 @@ class NavbarMain extends React.Component {
               </NavItem>
               
               </>;
+            }
 
               this.signToggle= <>
                                 <NavItem>
@@ -106,8 +108,10 @@ class NavbarMain extends React.Component {
         window.location.reload();
 
     }
-updateNavbarColor() {
-      if (
+
+
+ componentDidMount(){
+        if (
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
       ) {
@@ -118,14 +122,6 @@ updateNavbarColor() {
       ) {
         this.setState({NavbarColor:"navbar-transparent"});
       }
-}
-
- componentDidMount(){
-
-    
-        
-
-
         window.addEventListener("scroll", this.updateNavbarColor);
         return function cleanup() {
         window.removeEventListener("scroll", this.updateNavbarColor);
