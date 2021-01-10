@@ -32,35 +32,8 @@ class EditEventForm extends React.Component {
             description: "",
             redirectToEvents: false
            }
-        }
-    create() {
-        const event = {
-            event_name: this.state.event_name,
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            place: this.state.place,
-            description: this.state.description,
-            creator_id: this.props.user.id
-        }
-        console.log("--------CREATE EVENT FORM--------------");
-        console.log(this.props);
-        console.log("---------------------------------------");
-
-
-        console.log(event);
-        //post request 
-        axios.post('http://localhost/eventsWebSite-api/event/create.php', event) //CHNAGE THIS
-            .then(response => {
-                console.log(response)
-                this.setState({ redirectToEvents: true });
-            })
-            .catch(error => {
-                console.log(error)
-            });
-
-
-
     }
+    
 
     componentDidMount() {
         document.body.classList.add("login-page");

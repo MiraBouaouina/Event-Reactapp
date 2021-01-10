@@ -63,7 +63,7 @@ loadUser = (data) => {
                 <Switch>
                     <Route path="/home" render={(props) => <Home {...props} loadUser={this.loadUser} user={this.state.user}/>} />
                     <Route path="/signup" render={(props) => <Signup {...props} loadUser={this.loadUser} />} />
-                    <Route path="/profile" render={(props) => <Profile {...props} user={this.state.user} />} />
+                    <Route path="/profile" render={(props) => <Profile {...props} user={this.state.user} loadUser={this.loadUser} />} />
                     <Route path="/event" render={(props)=> <Event {...props} states={this.state} loadEvent={this.loadEvent} />} />
                     <Route path="/events" render={(props) => <Events {...props} user={this.state.user} loadUser={this.loadUser}/>} />
                     <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} user={this.state.user}/>} />

@@ -32,35 +32,25 @@ class NavbarMain extends React.Component {
         };
 
         this.eventCreateButton= <></>;
-        this.eventsButton = <> </>;
-
 
         this.signToggle= 
               <NavItem>
                 <NavLink onClick={() => this.setState({modal1:true}) }
                   id="sign-in">
-                  <i className="now-ui-icons users_circle-08"></i>
-                  <p className="d-lg-none d-xl-none">Sign in</p>
-                </NavLink>
-                <UncontrolledTooltip target="#sign-in">
                   Sign in
-                      </UncontrolledTooltip>
+                </NavLink>
               </NavItem>
               ;
 
 
         let check = window.localStorage.getItem('user');
         check = JSON.parse(check);
-        console.log("---------NAV BAR MAIN after USER GET FROM STORAGE--------");
+
         this.user.id= check.id;
         this.user.first_name= check.first_name;
         this.user.last_name= check.last_name;
         this.user.user_name= check.user_name;
         this.user.admin= check.admin;
-
-         
-        console.log(this.user);
-        console.log("--------------------------------");
 
         if(this.user.id) {
 
@@ -78,17 +68,20 @@ class NavbarMain extends React.Component {
               
               </>;
 
-              this.signToggle= <NavItem>
+              this.signToggle= <>
+                                <NavItem>
                                 <NavLink onClick={() => this.signOut()}>
                                     Sign Out
                                 </NavLink>
-    
-                            </NavItem>;
-              this.eventsButton = <NavItem>
-                <NavLink to="/events" tag={Link}>
-                  Events
-                </NavLink>
-              </NavItem>;
+                                </NavItem>
+
+                                <NavItem>
+                                  <NavLink to="/profile" tag={Link}>
+                                    <i className="now-ui-icons users_circle-08"></i>
+                                    <p className="d-lg-none d-xl-none">Profile</p>
+                                  </NavLink>
+                                </NavItem>
+                                </>
              
             }
 
@@ -118,12 +111,12 @@ updateNavbarColor() {
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
       ) {
-        this.setNavbarColor("");
+        this.setState({NavbarColor:""});
       } else if (
         document.documentElement.scrollTop < 400 ||
         document.body.scrollTop < 400
       ) {
-        this.setNavbarColor("navbar-transparent");
+        this.setState({NavbarColor:"navbar-transparent"});
       }
 }
 
@@ -164,7 +157,11 @@ updateNavbarColor() {
                 </NavLink>
               </NavItem>
            
-              {this.eventsButton}
+             <NavItem>
+                <NavLink to="/events" tag={Link}>
+                  Events
+                </NavLink>
+              </NavItem>
               
               
               {this.signToggle}

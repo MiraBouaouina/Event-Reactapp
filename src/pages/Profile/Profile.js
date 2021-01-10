@@ -21,7 +21,7 @@ import Participations from "../../components/Participations/Participations";
 import Footer from "../../components/Footer/Footer";
 
 
-const Profile = () => {
+const Profile = (props) => {
     const [activeTab, setActiveTab] = useState('1');
 
     const toggle = tab => {
@@ -45,10 +45,9 @@ const Profile = () => {
         user.admin= check.admin;
 
 
-
     return (
         <div>
-            <NavbarSecond />
+            <NavbarSecond user={props.user} loadUser={props.loadUser}/>
             <Container>
                 <div className={classes.head}>
                     <Row>

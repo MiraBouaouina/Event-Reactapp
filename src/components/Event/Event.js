@@ -21,13 +21,65 @@ import {
 
  
 
-const Event =(props) =>{
+class Event extends React.Component {
+     constructor(props) 
+     {
+        super(props);
+        this.state= {
+        modal3:false,
+        modal2:false
+       };
+        this.user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
+
+     this.buttons = <> </>;
+     let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);         
+                this.user.id= check.id;
+                this.user.first_name= check.first_name;
+                this.user.last_name= check.last_name;
+                this.user.user_name= check.user_name;
+                this.user.admin= check.admin;
+     if (this.user.id){
+        if(this.user.admin){
+          this.buttons = <>
+                      <Button onClick={() => this.setState({modal2:true})}
+                          id="show-event">
+                         Show event
+                        </Button>
+
+                        <Button onClick={() => this.setState({modal3:true})}
+                          id="edit-event">
+                         Edit event
+                        </Button>
+
+                        <Button onClick={() => this.deleteEvent()}
+                          id="delete-event">
+                         Delete event
+                        </Button>  
+                    </>;
+        }
+        else {
+          this.buttons = <>
+                          <Button onClick={() => this.setState({modal2:true})}
+                          id="show-event">
+                         Show event
+                        </Button>
+                        </>;
+
+        }
+    }
+
+  }
      
-     const [modal2, setModal2] = React.useState(false);
-     const [modal3, setModal3] = React.useState(false);
     
-    const deleteEvent = () =>{
-        let event = {"id": props.data.id};
+    deleteEvent(){
+        let event = {"id": this.props.data.id};
         axios.post('http://localhost/eventsWebSite-api/event/delete.php', event)
             .then(response => {
                 window.location.reload();
@@ -39,13 +91,7 @@ const Event =(props) =>{
 
 
 
-    /*toEvent(data) {
-        //this.props.loadEvent(data);
-        //return 
-          // ( <Redirect to="/event" />)
-        
-    }*/
-
+      render(){
         return (
             <div>
 
@@ -56,48 +102,32 @@ const Event =(props) =>{
                     <div className={classes.owner}>
 
                         <h5>
-                             {props.data.event_name}
+                             {this.props.data.event_name}
                         </h5>
 
                         <i class="fas fa-calendar-week "></i>
-                        <h4> {props.data.start_date}  {props.data.end_date}</h4>
+                        <h4> {this.props.data.start_date}  {this.props.data.end_date}</h4>
 
                         <i class="fa fa-map-marker orange"></i>
-                        <h4> {props.data.place}</h4>
-                        <Button onClick={() => setModal2(true)}
-                          id="show-event">
-                         Show event
-                          <p className="d-lg-none d-xl-none">Create an event</p>
-                        </Button>
-
-                        <Button onClick={() => setModal3(true)}
-                          id="edit-event">
-                         Edit event
-                          <p className="d-lg-none d-xl-none">Create an event</p>
-                        </Button>
-
-                        <Button onClick={() => deleteEvent()}
-                          id="delete-event">
-                         Delete event
-                          <p className="d-lg-none d-xl-none">Create an event</p>
-                        </Button>
-                
+                        <h4> {this.props.data.place}</h4>
+                        
+                            {this.buttons}
                          
                           <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                            toggle={() => setModal2(false)}
-                            isOpen={modal2}
+                            toggle={() => this.setState({modal2:false})}
+                            isOpen={this.state.modal2}
                           >
 
-                            <ShowEvent event={props.data}/>
+                            <ShowEvent event={this.props.data}/>
 
                           </Modal>
 
                           <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                            toggle={() => setModal3(false)}
-                            isOpen={modal3}
+                            toggle={() => this.setState({modal3:false})}
+                            isOpen={this.state.modal3}
                           >
 
-                            <EditEventForm event={props.data}/>
+                            <EditEventForm event={this.props.data}/>
 
                           </Modal>
                         
@@ -116,6 +146,6 @@ const Event =(props) =>{
     
 
 
+  }
 }
-
 export default Event;

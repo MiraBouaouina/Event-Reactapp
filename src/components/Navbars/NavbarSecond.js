@@ -43,11 +43,58 @@ componentDidMount() {
         this.user.last_name= check.last_name;
         this.user.user_name= check.user_name;
         this.user.admin= check.admin;
-    if (true) {
-      console.log("----------in NAV BAR 2 GETTING USER FROM LOCAL STORAGE------");
-      console.log(this.user);
-       console.log("--------------------------------");
-    }
+
+    this.signToggle= 
+              <NavItem>
+                <NavLink onClick={() => this.setState({modal1:true}) }
+                  id="sign-in">
+                  Sign in
+                </NavLink>
+              </NavItem>
+              ;
+
+    this.signToggle= 
+              <NavItem>
+                <NavLink onClick={() => this.setState({modal1:true}) }
+                  id="sign-in">
+                  Sign in
+                </NavLink>
+              </NavItem>
+              ;
+
+        if(this.user.id) {
+
+              this.eventCreateButton =          
+              <>
+              <NavItem className={classes.nvitem}>
+
+                <NavLink onClick={() => this.setState({modal2:true}) }
+                  id="create-event">
+                  Create an event
+                  <p className="d-lg-none d-xl-none"></p>
+                </NavLink>
+                
+              </NavItem>
+              
+              </>;
+
+              this.signToggle= <>
+                                <NavItem>
+                                <NavLink onClick={() => this.signOut()}>
+                                    Sign Out
+                                </NavLink>
+                                </NavItem>
+
+                                <NavItem>
+                                  <NavLink to="/profile" tag={Link}>
+                                    >
+                                    <i className="now-ui-icons users_circle-08"></i>
+                                    <p className="d-lg-none d-xl-none">Profile</p>
+                                  </NavLink>
+                                </NavItem>
+                                </>
+             
+            }
   }
 
 setModalhandler(){
@@ -71,14 +118,54 @@ setCollapsehandler(){
                 user_name: "",
                 admin: ""
                 };
+
         this.props.loadUser(user);
         this.setState({toHome:true});
 
-        console.log("---------NAV BAR SECOND LEAVE--------");
-        console.log(user);
-        console.log("--------------------------------");
-
     }
+
+renderNavBar(){
+  let navBar = 
+    <Nav navbar>
+          
+          {this.eventCreateButton}
+              
+           <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                toggle={() => this.setState({modal2:false}) }
+                isOpen={this.state.modal2}
+              >
+
+                <CreateEventForm user={this.props.user}/>
+
+              </Modal>
+              <NavItem>
+                <NavLink to="/home" tag={Link}>
+                  Home
+                </NavLink>
+              </NavItem>
+           
+             <NavItem>
+                <NavLink to="/events" tag={Link}>
+                  Events
+                </NavLink>
+              </NavItem>
+              
+              
+              {this.signToggle}
+              
+              
+              <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                toggle={() => this.setState({modal1:false})}
+                isOpen={this.state.modal1}
+              >
+
+                <Login loadUser={this.props.loadUser}/>
+
+              </Modal>
+
+            </Nav> ;
+    return navBar;
+ }
     
     render(){
         
@@ -121,58 +208,7 @@ setCollapsehandler(){
                         isOpen={this.state.collapseOpen}
                         navbar
                     >
-                        <Nav navbar>
-                           {
-                            (true) ?
-                            <>
-
-                            <NavItem className={classes.nvitem}>
-
-                                <NavLink onClick={() => this.setModalhandler() }
-                                  id="create-event">
-                                  Create an event
-                                  <p className="d-lg-none d-xl-none"></p>
-                                </NavLink>
-                                
-                              </NavItem>
-                              <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                                toggle={() => this.setModalhandler() }
-                                isOpen={this.state.modal2}
-                              >
-
-                                <CreateEventForm user={this.props.user}/>
-
-                              </Modal>
-
-                          </>
-                           : <> </> }
-
-
-                        
-                        
-                            <NavItem>
-                                <NavLink to="/home" tag={Link}>
-                                    Home
-                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink to="/events" tag={Link}>
-                                    Events
-                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink id="sign-out" onClick={() => this.signOut()}>
-                                <i className="now-ui-icons users_circle-08"></i>
-                                <p className="d-lg-none d-xl-none" >Sign out</p>
-                                <UncontrolledTooltip target="#sign-out" >
-                                    Sign out
-                                </UncontrolledTooltip>
-                                    
-                                </NavLink>
-    
-                            </NavItem>
-
-                        </Nav>
+                        {this.renderNavBar()}
                     </Collapse>
                 </Container>
             </Navbar>

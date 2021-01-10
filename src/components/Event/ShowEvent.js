@@ -25,10 +25,58 @@ class ShowEvent extends React.Component {
         console.log("------IN SHOW EVENTS------");
         console.log(props);
         console.log("--------------------------");
+
+
+        this.user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
+        this.button=    <Link to="/signup" >
+                                    <Button className="btn-round " color="purple" outline>
+
+                                        Register now
+                                    <i className="fas fa-sign-in-alt"></i>
+
+                                    </Button>
+                                </Link>;
+        let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+
+        this.user.id= check.id;
+        this.user.first_name= check.first_name;
+        this.user.last_name= check.last_name;
+        this.user.user_name= check.user_name;
+        this.user.admin= check.admin;
+        
+        if (this.user.id) {
+            this.button=
+               <Button className="btn-round " color="purple" outline onClick={() => { this.book() }}>
+                    Book 
+                </Button>
+         }
     }
 
+    book(){
+        let user = window.localStorage.getItem('user');
 
-    //must create event list outside of render else React returns error 
+        const participation = {
+            event_id: this.props.event.id,
+            user_id: JSON.parse(user).id
+        };
+        axios.post('http://localhost/eventsWebSite-api/participate/create.php', participation)
+            .then(response => {
+                console.log(response);
+                 window.alert('event booked!!');
+                })
+            .catch(error => {
+                window.alert('already booked!!');
+                console.log(error)
+                });
+      
+    }
  
     render(){
         return (
@@ -49,14 +97,7 @@ class ShowEvent extends React.Component {
                         <Row>
                             <Col>
                                 <Col >
-                                    <Link to="/signup" >
-                                        <Button className="btn-round " color="purple" outline >
-    
-                                            Register
-                                        <i className="fas fa-sign-in-alt" ></i>
-    
-                                        </Button>
-                                    </Link>
+                                    {this.button}
                                     <a href="#discover" >
                                         <Button className="btn-round " color="purple" outline style={{ marginLeft: '5px' }} >
     
