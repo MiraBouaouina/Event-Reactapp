@@ -23,13 +23,32 @@ class NavbarSecond extends React.Component {
         this.state = {
             toHome: false,
             modal2:false,
-            collapseOpen:false
+            collapseOpen:false,
+            };
+        this.user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
         };
 
-        console.log("---------NAV BAR SECOND ENTER--------");
-        console.log(this.props.user);
-        console.log("--------------------------------");
     }
+
+componentDidMount() {
+    let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+    this.user.id= check.id;
+        this.user.first_name= check.first_name;
+        this.user.last_name= check.last_name;
+        this.user.user_name= check.user_name;
+        this.user.admin= check.admin;
+    if (true) {
+      console.log("----------in NAV BAR 2 GETTING USER FROM LOCAL STORAGE------");
+      console.log(this.user);
+       console.log("--------------------------------");
+    }
+  }
 
 setModalhandler(){
     this.setState({
@@ -56,7 +75,7 @@ setCollapsehandler(){
         this.setState({toHome:true});
 
         console.log("---------NAV BAR SECOND LEAVE--------");
-        console.log(this.props.user);
+        console.log(user);
         console.log("--------------------------------");
 
     }
@@ -103,31 +122,31 @@ setCollapsehandler(){
                         navbar
                     >
                         <Nav navbar>
-                            if (this.props.user.admin) 
-                            {
+                           {
+                            (true) ?
                             <>
 
                             <NavItem className={classes.nvitem}>
 
-                            <NavLink onClick={() => this.setModalhandler()}
-                              id="create-event">
-                             
-                              <p className="d-lg-none d-xl-none">Create an event</p>
-                            </NavLink>
-                            
-                          </NavItem>
-                          <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                            toggle={() => this.setModalhandler()}
-                            isOpen={this.state.modal2}
-                          >
+                                <NavLink onClick={() => this.setModalhandler() }
+                                  id="create-event">
+                                  Create an event
+                                  <p className="d-lg-none d-xl-none"></p>
+                                </NavLink>
+                                
+                              </NavItem>
+                              <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                                toggle={() => this.setModalhandler() }
+                                isOpen={this.state.modal2}
+                              >
 
-                            <CreateEventForm user={this.props.user} />
+                                <CreateEventForm user={this.props.user}/>
 
-                          </Modal>
+                              </Modal>
 
                           </>
+                           : <> </> }
 
-                          }
 
                         
                         
@@ -142,8 +161,13 @@ setCollapsehandler(){
                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink onClick={() => this.signOut()}>
-                                    Sign Out
+                                <NavLink id="sign-out" onClick={() => this.signOut()}>
+                                <i className="now-ui-icons users_circle-08"></i>
+                                <p className="d-lg-none d-xl-none" >Sign out</p>
+                                <UncontrolledTooltip target="#sign-out" >
+                                    Sign out
+                                </UncontrolledTooltip>
+                                    
                                 </NavLink>
     
                             </NavItem>

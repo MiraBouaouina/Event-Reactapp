@@ -14,43 +14,190 @@ import {
   Nav,
   Container
 } from "reactstrap";
+class NavbarMain extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state= {
+        modal1:false,
+        modal2:false,
+        navbarColor:"navbar-transparent",
+        collapseOpen:false 
+       };
+       this.user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+        };
 
-const NavbarMain=(props) => {
-  const [modal1, setModal1] = React.useState(false);
-  const [modal2, setModal2] = React.useState(false);
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
-  const [collapseOpen, setCollapseOpen] = React.useState(false);
-  React.useEffect(() => {
-    const updateNavbarColor = () => {
+        this.eventCreateButton= <></>;
+        this.eventsButton = <> </>;
+
+
+        this.signToggle= 
+              <NavItem>
+                <NavLink onClick={() => this.setState({modal1:true}) }
+                  id="sign-in">
+                  <i className="now-ui-icons users_circle-08"></i>
+                  <p className="d-lg-none d-xl-none">Sign in</p>
+                </NavLink>
+                <UncontrolledTooltip target="#sign-in">
+                  Sign in
+                      </UncontrolledTooltip>
+              </NavItem>
+              ;
+
+
+        let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+        console.log("---------NAV BAR MAIN after USER GET FROM STORAGE--------");
+        this.user.id= check.id;
+        this.user.first_name= check.first_name;
+        this.user.last_name= check.last_name;
+        this.user.user_name= check.user_name;
+        this.user.admin= check.admin;
+
+         
+        console.log(this.user);
+        console.log("--------------------------------");
+
+        if(this.user.id) {
+
+              this.eventCreateButton =          
+              <>
+              <NavItem className={classes.nvitem}>
+
+                <NavLink onClick={() => this.setState({modal2:true}) }
+                  id="create-event">
+                  Create an event
+                  <p className="d-lg-none d-xl-none"></p>
+                </NavLink>
+                
+              </NavItem>
+              
+              </>;
+
+              this.signToggle= <NavItem>
+                                <NavLink onClick={() => this.signOut()}>
+                                    Sign Out
+                                </NavLink>
+    
+                            </NavItem>;
+              this.eventsButton = <NavItem>
+                <NavLink to="/events" tag={Link}>
+                  Events
+                </NavLink>
+              </NavItem>;
+             
+            }
+
+            
+    }
+
+     signOut(){
+         let user={ 
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
+        this.props.loadUser(user);
+        this.setState({toHome:true});
+
+        console.log("---------NAV BAR SECOND LEAVE--------");
+        console.log(user);
+        console.log("--------------------------------");
+
+        window.location.reload();
+
+    }
+updateNavbarColor() {
       if (
         document.documentElement.scrollTop > 399 ||
         document.body.scrollTop > 399
       ) {
-        setNavbarColor("");
+        this.setNavbarColor("");
       } else if (
         document.documentElement.scrollTop < 400 ||
         document.body.scrollTop < 400
       ) {
-        setNavbarColor("navbar-transparent");
+        this.setNavbarColor("navbar-transparent");
       }
-    };
-    window.addEventListener("scroll", updateNavbarColor);
-    return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
-    };
-  });
+}
+
+ componentDidMount(){
+
+    
+        
+
+
+        window.addEventListener("scroll", this.updateNavbarColor);
+        return function cleanup() {
+        window.removeEventListener("scroll", this.updateNavbarColor);
+        };
+
+
+
+ }
+
+
+ 
+ renderNavBar(){
+  let navBar = 
+    <Nav navbar>
+          
+          {this.eventCreateButton}
+              
+           <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                toggle={() => this.setState({modal2:false}) }
+                isOpen={this.state.modal2}
+              >
+
+                <CreateEventForm user={this.props.user}/>
+
+              </Modal>
+              <NavItem>
+                <NavLink to="/home" tag={Link}>
+                  Home
+                </NavLink>
+              </NavItem>
+           
+              {this.eventsButton}
+              
+              
+              {this.signToggle}
+              
+              
+              <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+                toggle={() => this.setState({modal1:false})}
+                isOpen={this.state.modal1}
+              >
+
+                <Login loadUser={this.props.loadUser}/>
+
+              </Modal>
+
+            </Nav> ;
+    return navBar;
+ }
+
+
+render() {
+
   return (
     <>
-      {collapseOpen ? (
+      {this.state.collapseOpen ? (
         <div
           id="bodyClick"
           onClick={() => {
             document.documentElement.classList.toggle("nav-open");
-            setCollapseOpen(false);
+            this.setState({collapseOpen:false});
           }}
         />
       ) : null}
-      <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
+      <Navbar className={"fixed-top " + this.state.navbarColor} color="info" expand="lg">
         <Container>
 
           <div className="navbar-translate">
@@ -68,9 +215,9 @@ const NavbarMain=(props) => {
               className="navbar-toggler navbar-toggler"
               onClick={() => {
                 document.documentElement.classList.toggle("nav-open");
-                setCollapseOpen(!collapseOpen);
+                this.setState({CollapseOpen:!this.state.collapseOpen});
               }}
-              aria-expanded={collapseOpen}
+              aria-expanded={this.state.collapseOpen}
               type="button"
             >
               <span className="navbar-toggler-bar top-bar"></span>
@@ -80,63 +227,16 @@ const NavbarMain=(props) => {
           </div>
          <Collapse
             className="justify-content-end"
-            isOpen={collapseOpen}
+            isOpen={this.state.collapseOpen}
             navbar
           >
-            <Nav navbar>
-              {/* <NavItem className={classes.nvitem}>
+            {this.renderNavBar()}
 
-                <NavLink onClick={() => setModal2(true)}
-                  id="create-event">
-                 Create an event
-                  <p className="d-lg-none d-xl-none">Create an event</p>
-                </NavLink>
-                
-              </NavItem>
-              <Modal  style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                toggle={() => setModal2(false)}
-                isOpen={modal2}
-              >
-
-                <CreateEventForm user={props.user}/>
-
-              </Modal>
-            */}
-              <NavItem>
-                <NavLink to="/home" tag={Link}>
-                  Home
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/events" tag={Link}>
-                  Events
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink onClick={() => setModal1(true)}
-                  id="sign-in">
-                  <i className="now-ui-icons users_circle-08"></i>
-                  <p className="d-lg-none d-xl-none">Sign in</p>
-                </NavLink>
-                <UncontrolledTooltip target="#sign-in">
-                  Sign in
-                      </UncontrolledTooltip>
-              </NavItem>
-              <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-                toggle={() => setModal1(false)}
-                isOpen={modal1}
-              >
-
-                <Login loadUser={props.loadUser}/>
-
-              </Modal>
-
-            </Nav>
           </Collapse>
         </Container>
       </Navbar>
     </>
   );
 }
-
+}
 export default NavbarMain;

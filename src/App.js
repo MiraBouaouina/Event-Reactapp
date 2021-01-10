@@ -24,15 +24,36 @@ class App extends React.Component {
         }
     }
 
+componentDidMount() {
+    let check = window.localStorage.getItem('user');
+    check = JSON.parse(check);
+    if ( true) {
+        console.log("----------in APP GETTING USER FROM LOCAL STORAGE------");
+      console.log(check);
+       console.log("--------------------------------");
+    }
+  }
+
+
 loadUser = (data) => {
-    this.setState({user: {
-        id: data.id,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        user_name: data.user_name,
-        admin: data.admin        
-    }});
-}
+    this.setState( 
+        (prevState) => ( 
+            {user: {
+                id: data.id,
+                first_name: data.first_name,
+                last_name: data.last_name,
+                user_name: data.user_name,
+                admin: data.admin        
+            }}),
+        () => {
+            console.log("----------in APP  LOCAL STORAGE SET STATE------");
+            window.localStorage.setItem('user', JSON.stringify(this.state.user));
+            console.log(window.localStorage.getItem('user'));
+            console.log("-----------------------------------------");
+        }   
+
+    );
+};
 
 
     render() {
@@ -44,8 +65,8 @@ loadUser = (data) => {
                     <Route path="/signup" render={(props) => <Signup {...props} loadUser={this.loadUser} />} />
                     <Route path="/profile" render={(props) => <Profile {...props} user={this.state.user} />} />
                     <Route path="/event" render={(props)=> <Event {...props} states={this.state} loadEvent={this.loadEvent} />} />
-                    <Route path="/events" render={(props) => <Events {...props} states={this.state} loadUser={this.loadUser}/>} />
-                    <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} states={this.state}/>} />
+                    <Route path="/events" render={(props) => <Events {...props} user={this.state.user} loadUser={this.loadUser}/>} />
+                    <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} user={this.state.user}/>} />
 
 
                     <Redirect to="/home" />

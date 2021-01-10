@@ -24,8 +24,17 @@ class Events extends React.Component {
      constructor(props) {
         super(props);
         this.state= {
-            events:[]
+            events:[],
+            
         }
+
+        this.user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
 
         console.log("-------------EVENTS--------------");
         console.log(this.props);
@@ -39,7 +48,28 @@ class Events extends React.Component {
                 })
             .catch(error => {
                 console.log(error)
-                })
+                });
+
+        let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+        
+        console.log("----------in EVENTS GETTING USER FROM LOCAL STORAGE------");
+       
+         
+                this.user.id= check.id;
+                this.user.first_name= check.first_name;
+                this.user.last_name= check.last_name;
+                this.user.user_name= check.user_name;
+                this.user.admin= check.admin;
+                       
+       
+
+        if (true) {
+            console.log(check);
+            console.log(this.user);
+            console.log("--------------------------------");
+        }
+
     }
     createEventsTable(){
         let table=[];
@@ -60,7 +90,7 @@ class Events extends React.Component {
     render() {
         return (
             <div>
-                <NavbarSecond user={this.props.states.user} loadUser={this.props.loadUser}/>
+                <NavbarSecond user={this.props.user} loadUser={this.props.loadUser}/>
                 <Container className={classes.contenu}>
 
 

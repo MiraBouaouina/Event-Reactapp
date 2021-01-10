@@ -16,6 +16,43 @@ import NavbarMain from "../../components/Navbars/NavbarMain";
 class Home extends React.Component {
      constructor(props) {
         super(props);
+        this.user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
+        this.button=    <Link to="/signup" >
+                                    <Button className="btn-round " color="purple" outline>
+
+                                        Register now
+                                    <i className="fas fa-sign-in-alt"></i>
+
+                                    </Button>
+                                </Link>;
+        let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+
+        this.user.id= check.id;
+        this.user.first_name= check.first_name;
+        this.user.last_name= check.last_name;
+        this.user.user_name= check.user_name;
+        this.user.admin= check.admin;
+        
+        if (this.user.id) {
+            this.button=
+             <Link to="/Events" >
+               <Button className="btn-round " color="purple" outline>
+                    See All Events!
+                  <i className="fas fa-sign-in-alt"></i>
+
+                </Button>
+             </Link>;
+
+        }
+
+                                    
     }
     //Component did mount
 
@@ -57,14 +94,10 @@ class Home extends React.Component {
                             </p>
                             </Col>
                             <Col >
-                                <Link to="/signup" >
-                                    <Button className="btn-round " color="purple" outline>
 
-                                        Register now
-                                    <i className="fas fa-sign-in-alt"></i>
-
-                                    </Button>
-                                </Link>
+                                {this.button}
+                                
+                                    
 
                             </Col>
                         </Row>

@@ -16,7 +16,7 @@ import {
     Col
 } from "reactstrap";
 
-class CreateEventForm extends React.Component {
+class EditEventForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -72,7 +72,28 @@ class CreateEventForm extends React.Component {
             document.body.classList.remove("login-page");
             document.body.classList.remove("sidebar-collapse");
         };
+    }
 
+        editEvent(){
+        let user = window.localStorage.getItem('user');
+
+        const event = {
+            id: this.props.event.id,
+            event_name: this.props.event.event_name,
+            start_date: this.props.event.start_date,
+            end_date: this.props.event.end_date,
+            place: this.props.event.place,
+            description: this.props.event.description,
+            creator_id: JSON.parse(user).id
+        };
+        axios.post('http://localhost/eventsWebSite-api/event/update.php', event)
+            .then(response => {
+                 window.location.reload();
+                })
+            .catch(error => {
+                console.log(error)
+                });
+      
     }
     render() {
         const redirectToEvents = this.state.redirectToEvents;
@@ -97,7 +118,7 @@ class CreateEventForm extends React.Component {
                             <Form action="" className="form" method="">
                                 <CardHeader >
                                     <h2>
-                                        Create Event
+                                        Edit Event
                                 </h2>
                                 </CardHeader>
                                 <CardBody>
@@ -114,9 +135,9 @@ class CreateEventForm extends React.Component {
                                         </InputGroupAddon>
                                         <Input
 
-                                            placeholder="Event Name..."
+                                            defaultValue={this.props.event.event_name}
                                             type="text"
-                                            onChange={(item) => { this.setState({ event_name: item.target.value }) }}
+                                            onChange={(item) => { this.props.event.event_name= item.target.value }}
 
                                             onFocus={() => this.setState({ firstFocus: true })}
                                             onBlur={() => this.setState({ firstFocus: false })}
@@ -134,9 +155,9 @@ class CreateEventForm extends React.Component {
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
-                                            placeholder="Start Date..." //Change to date fields!!!
+                                            defaultValue={this.props.event.start_date}
                                             type="text"
-                                            onChange={(item) => { this.setState({ start_date: item.target.value }) }}
+                                            onChange={(item) => { this.props.event.start_date= item.target.value }}
                                             onFocus={() => this.setState({ lastFocus: true })}
                                             onBlur={() => this.setState({ lastFocus: false })}
                                         ></Input>
@@ -154,9 +175,9 @@ class CreateEventForm extends React.Component {
                                         </InputGroupAddon>
 
                                         <Input
-                                            placeholder="End Date..."
+                                            defaultValue={this.props.event.end_date}
                                             type="text"
-                                            onChange={(item) => { this.setState({ end_date: item.target.value }) }}
+                                            onChange={(item) => { this.props.event.end_date= item.target.value }}
                                             onFocus={() => this.setState({ userFocus: true })}
                                             onBlur={() => this.setState({ userFocus: false })}
                                         ></Input>
@@ -171,8 +192,8 @@ class CreateEventForm extends React.Component {
 
                                         <InputGroup>
                                         <Input
-                                            placeholder="Place..."
-                                            onChange={(item) => { this.setState({ place: item.target.value }) }}
+                                            defaultValue={this.props.event.place}
+                                            onChange={(item) => { this.props.event.place= item.target.value }}
                                             onFocus={() => this.setState({ passFocus: true })}
                                             onBlur={() => this.setState({ passFocus: false })}
                                         ></Input>
@@ -180,8 +201,8 @@ class CreateEventForm extends React.Component {
 
                                         <InputGroup>
                                         <Input type="textarea"
-                                            placeholder="Description..."
-                                            onChange={(item) => { this.setState({ description: item.target.value }) }}
+                                            defaultValue={this.props.event.description}
+                                            onChange={(item) => { this.props.event.description= item.target.value }}
                                             onFocus={() => this.setState({ passFocus: true })}
                                             onBlur={() => this.setState({ passFocus: false })}
                                         ></Input>
@@ -194,10 +215,10 @@ class CreateEventForm extends React.Component {
                                         className="btn-round"
                                         color="info"
                                         size="lg"
-                                        onClick={() => { this.create() }}
+                                        onClick={() => { this.editEvent() }}
 
                                     >
-                                        Create Event
+                                        Edit Event
                     </Button>
                                   
                                 </CardFooter>
@@ -211,4 +232,4 @@ class CreateEventForm extends React.Component {
     }
 }
 
-export default CreateEventForm;
+export default EditEventForm;

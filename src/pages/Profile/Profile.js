@@ -28,6 +28,24 @@ const Profile = () => {
         if (activeTab !== tab) setActiveTab(tab);
     }
 
+    let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+        let user={ //connected user profile
+                id:"",
+                first_name: "",
+                last_name: "",
+                user_name: "",
+                admin: ""
+                };
+
+        user.id= check.id;
+        user.first_name= check.first_name;
+        user.last_name= check.last_name;
+        user.user_name= check.user_name;
+        user.admin= check.admin;
+
+
+
     return (
         <div>
             <NavbarSecond />
@@ -44,10 +62,10 @@ const Profile = () => {
                         </Col>
                         <Col md="8" xs="8" style={{ marginTop: "20px" }}>
                             <h3>
-                                Amira Bouaouina
+                                {user.first_name} {user.last_name} 
                             </h3>
                             <h5>
-                                Software Engineering Student
+                                {user.user_name}
                             </h5>
 
                             <Button style={{
