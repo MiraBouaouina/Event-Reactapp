@@ -6,7 +6,6 @@ import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Event from "./pages/Event/Event";
 import Events from "./pages/Event/Events";
-import LoginPage from "./pages/Login/LoginPage";
 import Login from "./components/Login/Login";
 import Apropos from "./pages/Apropos/Apropos";
 

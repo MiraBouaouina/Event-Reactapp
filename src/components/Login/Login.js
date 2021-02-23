@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Login.module.css";
-import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -30,31 +30,31 @@ class Login extends React.Component {
             password: ""
         }
 
-                console.log("---------login BEFORE--------");
-               console.log(this.props);
-               console.log("-----------------");
+        console.log("---------login BEFORE--------");
+        console.log(this.props);
+        console.log("-----------------");
 
     }
-    
+
     submit() {
-         const user = {
+        const user = {
             user_name: this.state.user_name,
             pwd: this.state.pwd
         }
         axios.post('http://localhost/eventsWebSite-api/user/signin.php', user)
             .then(response => {
-            let data = response.data;
+                let data = response.data;
                 console.log("---------login DATA FROM AXIOS RESPONSE--------");
-               console.log(data);
-               console.log("--------------------------------------");
-            if(true){
-               this.props.loadUser(data);
-               this.setState({ redirectToEvents: true });
-               console.log("---------login AFTER--------");
-               console.log(this.props);
-               console.log("-----------------");
+                console.log(data);
+                console.log("--------------------------------------");
+                if (true) {
+                    this.props.loadUser(data);
+                    this.setState({ redirectToEvents: true });
+                    console.log("---------login AFTER--------");
+                    console.log(this.props);
+                    console.log("-----------------");
 
-           }
+                }
             })
             .catch(error => {
                 console.log(error)
@@ -62,9 +62,9 @@ class Login extends React.Component {
     }
     render() {
         const redirectToEvents = this.state.redirectToEvents;
-        if (redirectToEvents===true) {
-               return <Redirect to="/Events"/>
-            }
+        if (redirectToEvents === true) {
+            return <Redirect to="/Events" />
+        }
 
         return (
 

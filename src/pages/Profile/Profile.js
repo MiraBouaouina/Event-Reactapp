@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import classes from "./Profile.module.css";
 import classnames from 'classnames';
+import axios from 'axios';
+
 // reactstrap components
 import {
     Container,
     Row,
     Col,
-    Button,
     TabContent,
     TabPane,
     Nav,
@@ -22,26 +23,45 @@ import Footer from "../../components/Footer/Footer";
 
 const Profile = (props) => {
     const [activeTab, setActiveTab] = useState('1');
-
+    const [user, setUser] = useState('null');
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
     }
 
-    let check = window.localStorage.getItem('user');
-    check = JSON.parse(check);
-    let user = { //connected user profile
-        id: "",
-        first_name: "",
-        last_name: "",
-        user_name: "",
-        admin: ""
-    };
+    const uploadHandler = (event) => {
+        console.log('event.target.files[0]');
+        console.log(event.target.files[0]);
+        const fd = new FormData();
+        fd.append('image', event.target.files[0]);
 
-    user.id = check.id;
-    user.first_name = check.first_name;
-    user.last_name = check.last_name;
-    user.user_name = check.user_name;
-    user.admin = check.admin;
+        axios.post('http://localhost/eventsWebSite-api/user/upload.php', fd)
+            .then(res => {
+                console.log(res);
+                console.log('done');
+            }
+            );
+
+    }
+    React.useEffect(() => {
+        let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+        let _user = {
+            id: "",
+            first_name: "",
+            last_name: "",
+            user_name: "",
+            admin: ""
+        };
+
+        _user.id = check.id;
+        _user.first_name = check.first_name;
+        _user.last_name = check.last_name;
+        _user.user_name = check.user_name;
+        _user.admin = check.admin;
+        setUser({
+            ..._user
+        })
+    }, [])
 
 
     return (
@@ -62,6 +82,9 @@ const Profile = (props) => {
                             <h3>
                                 {user.user_name}
                             </h3>
+                        </Col>
+                        <Col>
+                            <input type="file" onChange={uploadHandler} />
                         </Col>
                     </Row>
                 </div>

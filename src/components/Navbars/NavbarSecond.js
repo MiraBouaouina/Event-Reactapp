@@ -4,7 +4,6 @@ import Login from "../Login/Login.js";
 import classes from "./NavbarSecond.module.css";
 import CreateEventForm from "../Event/CreateEventForm";
 import {
-  Button,
   Modal,
   UncontrolledTooltip,
   Collapse,
@@ -55,15 +54,6 @@ class NavbarSecond extends React.Component {
       </NavItem>
       ;
 
-    this.signToggle =
-      <NavItem>
-        <NavLink onClick={() => this.setState({ modal1: true })}
-          id="sign-in">
-          Sign in
-                </NavLink>
-      </NavItem>
-      ;
-
     if (this.user.id) {
       if (this.user.admin) {
         this.eventCreateButton =
@@ -81,7 +71,7 @@ class NavbarSecond extends React.Component {
           </>;
       }
 
-      this.signToggle = <>
+      this.signToggle = <React.Fragment>
         <NavItem>
           <NavLink onClick={() => this.signOut()}>
             Sign Out
@@ -90,11 +80,15 @@ class NavbarSecond extends React.Component {
 
         <NavItem>
           <NavLink to="/profile" tag={Link}>
-            <i className="now-ui-icons users_circle-08"></i>
-            <p className="d-lg-none d-xl-none">Profile</p>
+            <i className="now-ui-icons users_circle-08">
+
+            </i>
+            {this.user.first_name}
+
+
           </NavLink>
         </NavItem>
-      </>
+      </React.Fragment>
 
     }
   }

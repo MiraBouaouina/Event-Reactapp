@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Link, BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -31,8 +31,8 @@ class CreateEventForm extends React.Component {
             place: "",
             description: "",
             redirectToEvents: false
-           }
         }
+    }
     create() {
         const event = {
             event_name: this.state.event_name,
@@ -49,7 +49,7 @@ class CreateEventForm extends React.Component {
 
         console.log(event);
         //post request 
-        axios.post('http://localhost/eventsWebSite-api/event/create.php', event) //CHNAGE THIS
+        axios.post('http://localhost/eventsWebSite-api/event/create.php', event)
             .then(response => {
                 console.log(response)
                 this.setState({ redirectToEvents: true });
@@ -76,11 +76,11 @@ class CreateEventForm extends React.Component {
     }
     render() {
         const redirectToEvents = this.state.redirectToEvents;
-        if (redirectToEvents===true) {
-               
-               window.location.reload();
-               return <Redirect to="/Events"/>
-            }
+        if (redirectToEvents === true) {
+
+            window.location.reload();
+            return <Redirect to="/Events" />
+        }
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff">
@@ -135,7 +135,7 @@ class CreateEventForm extends React.Component {
                                         </InputGroupAddon>
                                         <Input
                                             placeholder="Start Date..." //Change to date fields!!!
-                                            type="text"
+                                            type="date"
                                             onChange={(item) => { this.setState({ start_date: item.target.value }) }}
                                             onFocus={() => this.setState({ lastFocus: true })}
                                             onBlur={() => this.setState({ lastFocus: false })}
@@ -155,7 +155,7 @@ class CreateEventForm extends React.Component {
 
                                         <Input
                                             placeholder="End Date..."
-                                            type="text"
+                                            type="date"
                                             onChange={(item) => { this.setState({ end_date: item.target.value }) }}
                                             onFocus={() => this.setState({ userFocus: true })}
                                             onBlur={() => this.setState({ userFocus: false })}
@@ -167,24 +167,24 @@ class CreateEventForm extends React.Component {
                                             (this.state.passFocus ? " input-group-focus" : "")
                                         }
                                     >
-                                       
+
 
                                         <InputGroup>
-                                        <Input
-                                            placeholder="Place..."
-                                            onChange={(item) => { this.setState({ place: item.target.value }) }}
-                                            onFocus={() => this.setState({ passFocus: true })}
-                                            onBlur={() => this.setState({ passFocus: false })}
-                                        ></Input>
+                                            <Input
+                                                placeholder="Place..."
+                                                onChange={(item) => { this.setState({ place: item.target.value }) }}
+                                                onFocus={() => this.setState({ passFocus: true })}
+                                                onBlur={() => this.setState({ passFocus: false })}
+                                            ></Input>
                                         </InputGroup>
 
                                         <InputGroup>
-                                        <Input type="textarea"
-                                            placeholder="Description..."
-                                            onChange={(item) => { this.setState({ description: item.target.value }) }}
-                                            onFocus={() => this.setState({ passFocus: true })}
-                                            onBlur={() => this.setState({ passFocus: false })}
-                                        ></Input>
+                                            <Input type="textarea"
+                                                placeholder="Description..."
+                                                onChange={(item) => { this.setState({ description: item.target.value }) }}
+                                                onFocus={() => this.setState({ passFocus: true })}
+                                                onBlur={() => this.setState({ passFocus: false })}
+                                            ></Input>
                                         </InputGroup>
                                     </InputGroup>
                                 </CardBody>
@@ -199,7 +199,7 @@ class CreateEventForm extends React.Component {
                                     >
                                         Create Event
                     </Button>
-                                  
+
                                 </CardFooter>
                             </Form>
                         </Card>

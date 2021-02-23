@@ -79,9 +79,9 @@ class NavbarMain extends React.Component {
         </NavItem>
 
         <NavItem>
-          <NavLink to="/profile" tag={Link}>
+          <NavLink style={{ display: 'flex' }} to="/profile" tag={Link}>
             <i className="now-ui-icons users_circle-08"></i>
-            <p className="d-lg-none d-xl-none">Profile</p>
+            <span>{this.user.first_name}</span>
           </NavLink>
         </NavItem>
       </>
