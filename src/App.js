@@ -8,52 +8,56 @@ import Event from "./pages/Event/Event";
 import Events from "./pages/Event/Events";
 import LoginPage from "./pages/Login/LoginPage";
 import Login from "./components/Login/Login";
+import Apropos from "./pages/Apropos/Apropos";
+
 
 
 class App extends React.Component {
-   constructor(){
+    constructor() {
         super();
         this.state = {
-            user:{ //connected user profile
-                id:"",
+            user: { //connected user profile
+                id: "",
                 first_name: "",
                 last_name: "",
                 user_name: "",
                 admin: ""
-                }
+            }
         }
     }
 
-componentDidMount() {
-    let check = window.localStorage.getItem('user');
-    check = JSON.parse(check);
-    if ( true) {
-        console.log("----------in APP GETTING USER FROM LOCAL STORAGE------");
-      console.log(check);
-       console.log("--------------------------------");
+    componentDidMount() {
+        let check = window.localStorage.getItem('user');
+        check = JSON.parse(check);
+        if (true) {
+            console.log("----------in APP GETTING USER FROM LOCAL STORAGE------");
+            console.log(check);
+            console.log("--------------------------------");
+        }
     }
-  }
 
 
-loadUser = (data) => {
-    this.setState( 
-        (prevState) => ( 
-            {user: {
-                id: data.id,
-                first_name: data.first_name,
-                last_name: data.last_name,
-                user_name: data.user_name,
-                admin: data.admin        
-            }}),
-        () => {
-            console.log("----------in APP  LOCAL STORAGE SET STATE------");
-            window.localStorage.setItem('user', JSON.stringify(this.state.user));
-            console.log(window.localStorage.getItem('user'));
-            console.log("-----------------------------------------");
-        }   
+    loadUser = (data) => {
+        this.setState(
+            (prevState) => (
+                {
+                    user: {
+                        id: data.id,
+                        first_name: data.first_name,
+                        last_name: data.last_name,
+                        user_name: data.user_name,
+                        admin: data.admin
+                    }
+                }),
+            () => {
+                console.log("----------in APP  LOCAL STORAGE SET STATE------");
+                window.localStorage.setItem('user', JSON.stringify(this.state.user));
+                console.log(window.localStorage.getItem('user'));
+                console.log("-----------------------------------------");
+            }
 
-    );
-};
+        );
+    };
 
 
     render() {
@@ -61,13 +65,13 @@ loadUser = (data) => {
 
             <BrowserRouter>
                 <Switch>
-                    <Route path="/home" render={(props) => <Home {...props} loadUser={this.loadUser} user={this.state.user}/>} />
+                    <Route path="/home" render={(props) => <Home {...props} loadUser={this.loadUser} user={this.state.user} />} />
                     <Route path="/signup" render={(props) => <Signup {...props} loadUser={this.loadUser} />} />
                     <Route path="/profile" render={(props) => <Profile {...props} user={this.state.user} loadUser={this.loadUser} />} />
-                    <Route path="/event" render={(props)=> <Event {...props} states={this.state} loadEvent={this.loadEvent} />} />
-                    <Route path="/events" render={(props) => <Events {...props} user={this.state.user} loadUser={this.loadUser}/>} />
-                    <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} user={this.state.user}/>} />
-
+                    <Route path="/event" render={(props) => <Event {...props} states={this.state} loadEvent={this.loadEvent} />} />
+                    <Route path="/events" render={(props) => <Events {...props} user={this.state.user} loadUser={this.loadUser} />} />
+                    <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} user={this.state.user} />} />
+                    <Route path="/apropos" render={(props) => <Apropos {...props} loadUser={this.loadUser} />} />
 
                     <Redirect to="/home" />
                 </Switch>

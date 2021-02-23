@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classes from "./Profile.module.css";
-import { Link } from "react-router-dom";
 import classnames from 'classnames';
 // reactstrap components
 import {
@@ -29,25 +28,25 @@ const Profile = (props) => {
     }
 
     let check = window.localStorage.getItem('user');
-        check = JSON.parse(check);
-        let user={ //connected user profile
-                id:"",
-                first_name: "",
-                last_name: "",
-                user_name: "",
-                admin: ""
-                };
+    check = JSON.parse(check);
+    let user = { //connected user profile
+        id: "",
+        first_name: "",
+        last_name: "",
+        user_name: "",
+        admin: ""
+    };
 
-        user.id= check.id;
-        user.first_name= check.first_name;
-        user.last_name= check.last_name;
-        user.user_name= check.user_name;
-        user.admin= check.admin;
+    user.id = check.id;
+    user.first_name = check.first_name;
+    user.last_name = check.last_name;
+    user.user_name = check.user_name;
+    user.admin = check.admin;
 
 
     return (
         <div>
-            <NavbarSecond user={props.user} loadUser={props.loadUser}/>
+            <NavbarSecond user={props.user} loadUser={props.loadUser} />
             <Container>
                 <div className={classes.head}>
                     <Row>
@@ -94,7 +93,7 @@ const Profile = (props) => {
 
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
-                            <Aboutme first_name={user.first_name} last_name={user.last_name}/>
+                            <Aboutme first_name={user.first_name} last_name={user.last_name} />
                         </TabPane>
                         <TabPane tabId="2">
                             <Participations />

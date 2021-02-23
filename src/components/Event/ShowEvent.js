@@ -44,12 +44,12 @@ class ShowEvent extends React.Component {
                                 </Link>;
         let check = window.localStorage.getItem('user');
         check = JSON.parse(check);
-
+        if(check){
         this.user.id= check.id;
         this.user.first_name= check.first_name;
         this.user.last_name= check.last_name;
         this.user.user_name= check.user_name;
-        this.user.admin= check.admin;
+        this.user.admin= check.admin;}
         
         if (this.user.id) {
             this.button=

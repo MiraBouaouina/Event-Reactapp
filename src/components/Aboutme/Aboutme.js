@@ -12,7 +12,7 @@ const Aboutme = (props) => {
         <div className={classes.about}>
             <Row >
                 <Col xs="3" className={classes.icon} >
-                    <i class="fas fa-at"></i>
+                    <i class="fas fa-user"></i>
                 </Col>
 
                 <Col xs="3" >
@@ -26,7 +26,7 @@ const Aboutme = (props) => {
 
             <Row >
                 <Col xs="3" className={classes.icon}>
-                    <i class="fas fa-phone"></i>
+                    <i class="fas fa-user"></i>
                 </Col>
 
                 <Col xs="3">

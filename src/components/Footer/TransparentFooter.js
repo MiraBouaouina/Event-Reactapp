@@ -1,8 +1,12 @@
 /*eslint-disable*/
 import React from "react";
+import { Link } from "react-router-dom";
+import classes from "./Footer.module.css";
 
 // reactstrap components
-import { Container } from "reactstrap";
+import {
+    Container
+} from "reactstrap";
 
 function TransparentFooter() {
     return (
@@ -11,21 +15,13 @@ function TransparentFooter() {
                 <nav>
                     <ul>
                         <li>
-                            <a
-                                href="http://presentation.creative-tim.com?ref=nukr-transparent-footer"
-                                target="_blank"
+                            <Link to="/apropos"
+
                             >
                                 About Us
-              </a>
+              </Link>
                         </li>
-                        <li>
-                            <a
-                                href="http://blog.creative-tim.com?ref=nukr-transparent-footer"
-                                target="_blank"
-                            >
-                                Blog
-              </a>
-                        </li>
+
                     </ul>
                 </nav>
                 <div className="copyright" id="copyright">
@@ -33,7 +29,7 @@ function TransparentFooter() {
                 </div>
 
             </Container>
-        </footer>
+        </footer >
     );
 }
 

@@ -14,45 +14,46 @@ import {
 import TransparentFooter from "../../components/Footer/TransparentFooter";
 import NavbarMain from "../../components/Navbars/NavbarMain";
 class Home extends React.Component {
-     constructor(props) {
+    constructor(props) {
         super(props);
-        this.user={ //connected user profile
-                id:"",
-                first_name: "",
-                last_name: "",
-                user_name: "",
-                admin: ""
-                };
-        this.button=    <Link to="/signup" >
-                                    <Button className="btn-round " color="purple" outline>
+        this.user = { //connected user profile
+            id: "",
+            first_name: "",
+            last_name: "",
+            user_name: "",
+            admin: ""
+        };
+        this.button = <Link to="/signup" >
+            <Button className="btn-round " color="purple" outline>
 
-                                        Register now
+                Register now
                                     <i className="fas fa-sign-in-alt"></i>
 
-                                    </Button>
-                                </Link>;
+            </Button>
+        </Link>;
         let check = window.localStorage.getItem('user');
         check = JSON.parse(check);
+        if (check) {
+            this.user.id = check.id;
+            this.user.first_name = check.first_name;
+            this.user.last_name = check.last_name;
+            this.user.user_name = check.user_name;
+            this.user.admin = check.admin;
+        }
 
-        this.user.id= check.id;
-        this.user.first_name= check.first_name;
-        this.user.last_name= check.last_name;
-        this.user.user_name= check.user_name;
-        this.user.admin= check.admin;
-        
         if (this.user.id) {
-            this.button=
-             <Link to="/Events" >
-               <Button className="btn-round " color="purple" outline>
-                    See All Events!
+            this.button =
+                <Link to="/Events" >
+                    <Button className="btn-round " color="purple" outline>
+                        See All Events!
                   <i className="fas fa-sign-in-alt"></i>
 
-                </Button>
-             </Link>;
+                    </Button>
+                </Link>;
 
         }
 
-                                    
+
     }
     //Component did mount
 
@@ -74,7 +75,7 @@ class Home extends React.Component {
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff"> {/*9933ff*/}
-                <NavbarMain loadUser={this.props.loadUser} user={this.props.user}/>
+                <NavbarMain loadUser={this.props.loadUser} user={this.props.user} />
                 <div
                     className="page-header-image"
                     style={{
@@ -96,8 +97,8 @@ class Home extends React.Component {
                             <Col >
 
                                 {this.button}
-                                
-                                    
+
+
 
                             </Col>
                         </Row>

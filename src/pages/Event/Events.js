@@ -21,48 +21,48 @@ import Footer from "../../components/Footer/Footer";
 
 
 class Events extends React.Component {
-     constructor(props) {
+    constructor(props) {
         super(props);
-        this.state= {
-            events:[],
-            
+        this.state = {
+            events: [],
+
         }
 
-        this.user={ //connected user profile
-                id:"",
-                first_name: "",
-                last_name: "",
-                user_name: "",
-                admin: ""
-                };
+        this.user = { //connected user profile
+            id: "",
+            first_name: "",
+            last_name: "",
+            user_name: "",
+            admin: ""
+        };
 
         console.log("-------------EVENTS--------------");
         console.log(this.props);
         console.log("--------------------------------");
     }
     //must create event list outside of render else React returns error
-    componentDidMount(){
+    componentDidMount() {
         axios.get('http://localhost/eventsWebSite-api/event/fetch_all.php')
             .then(response => {
-                this.setState({events: response.data});
-                })
+                this.setState({ events: response.data });
+            })
             .catch(error => {
                 console.log(error)
-                });
+            });
 
         let check = window.localStorage.getItem('user');
         check = JSON.parse(check);
-        
+
         console.log("----------in EVENTS GETTING USER FROM LOCAL STORAGE------");
-       
-         
-                this.user.id= check.id;
-                this.user.first_name= check.first_name;
-                this.user.last_name= check.last_name;
-                this.user.user_name= check.user_name;
-                this.user.admin= check.admin;
-                       
-       
+
+        if (check) {
+            this.user.id = check.id;
+            this.user.first_name = check.first_name;
+            this.user.last_name = check.last_name;
+            this.user.user_name = check.user_name;
+            this.user.admin = check.admin;
+        }
+
 
         if (true) {
             console.log(check);
@@ -71,26 +71,26 @@ class Events extends React.Component {
         }
 
     }
-    createEventsTable(){
-        let table=[];
-        let data= [];
-        
-        data = this.state.events;       
+    createEventsTable() {
+        let table = [];
+        let data = [];
 
-            data.map( (event) => {
-                table.push(<tr><Event data={event} loadEvent={this.props.loadEvent} /> </tr>);
+        data = this.state.events;
 
-            })
-            return table;
-                    
-               
-        
+        data.map((event) => {
+            table.push(<tr><Event data={event} loadEvent={this.props.loadEvent} /> </tr>);
+
+        })
+        return table;
+
+
+
     }
-        
+
     render() {
         return (
             <div>
-                <NavbarSecond user={this.props.user} loadUser={this.props.loadUser}/>
+                <NavbarSecond user={this.props.user} loadUser={this.props.loadUser} />
                 <Container className={classes.contenu}>
 
 
