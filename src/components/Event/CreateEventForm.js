@@ -141,6 +141,8 @@ class CreateEventForm extends React.Component {
                                             onBlur={() => this.setState({ lastFocus: false })}
                                         ></Input>
                                     </InputGroup>
+                                    <p>End date...</p>
+
                                     <InputGroup
                                         className={
                                             "no-border input-lg" +
@@ -152,7 +154,6 @@ class CreateEventForm extends React.Component {
                                                 <i className="now-ui-icons text_caps-small"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
-
                                         <Input
                                             placeholder="End Date..."
                                             type="date"

@@ -20,7 +20,8 @@ class App extends React.Component {
                 first_name: "",
                 last_name: "",
                 user_name: "",
-                admin: ""
+                admin: "",
+                photo: ""
             }
         }
     }
@@ -45,7 +46,8 @@ class App extends React.Component {
                         first_name: data.first_name,
                         last_name: data.last_name,
                         user_name: data.user_name,
-                        admin: data.admin
+                        admin: data.admin,
+                        photo: data.photo
                     }
                 }),
             () => {

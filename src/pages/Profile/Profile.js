@@ -20,28 +20,10 @@ import Aboutme from "../../components/Aboutme/Aboutme";
 import Participations from "../../components/Participations/Participations";
 import Footer from "../../components/Footer/Footer";
 
-
 const Profile = (props) => {
     const [activeTab, setActiveTab] = useState('1');
-    const [user, setUser] = useState('null');
-    const toggle = tab => {
-        if (activeTab !== tab) setActiveTab(tab);
-    }
-
-    const uploadHandler = (event) => {
-        console.log('event.target.files[0]');
-        console.log(event.target.files[0]);
-        const fd = new FormData();
-        fd.append('image', event.target.files[0]);
-
-        axios.post('http://localhost/eventsWebSite-api/user/upload.php', fd)
-            .then(res => {
-                console.log(res);
-                console.log('done');
-            }
-            );
-
-    }
+    const [user, setUser] = useState({});
+    const inputRef = React.useRef(null)
     React.useEffect(() => {
         let check = window.localStorage.getItem('user');
         check = JSON.parse(check);
@@ -50,7 +32,8 @@ const Profile = (props) => {
             first_name: "",
             last_name: "",
             user_name: "",
-            admin: ""
+            admin: "",
+            photo: ""
         };
 
         _user.id = check.id;
@@ -58,10 +41,32 @@ const Profile = (props) => {
         _user.last_name = check.last_name;
         _user.user_name = check.user_name;
         _user.admin = check.admin;
+        _user.photo = check.photo;
         setUser({
             ..._user
         })
+        console.log('useEffect');
+        console.log(user);
     }, [])
+    const toggle = tab => {
+        if (activeTab !== tab) setActiveTab(tab);
+    }
+
+    const uploadHandler = (event) => {
+        const fd = new FormData()
+        fd.append('image', event.target.files[0])
+        fd.append('userId', user.id)
+        axios.post('http://localhost/eventsWebSite-api/user/upload.php', fd)
+            .then(res => {
+                console.log(res)
+                console.log('done');
+                setUser({ ...user, photo: res.data });
+                props.loadUser({ ...user, photo: res.data });
+
+            }
+            );
+
+    }
 
 
     return (
@@ -72,9 +77,9 @@ const Profile = (props) => {
                     <Row>
                         <Col md="2" xs="4">
                             <img
-                                className={`${classes.img} rounded-circle img-raise`}
+                                className={classes.img}
 
-                                src={require("assets/img/julie.jpg")}
+                                src={"http://localhost/eventsWebSite-api/" + user.photo}
                             ></img>
 
                         </Col>
@@ -84,7 +89,13 @@ const Profile = (props) => {
                             </h3>
                         </Col>
                         <Col>
-                            <input type="file" onChange={uploadHandler} />
+                            <input ref={inputRef} type="file" style={{ display: 'none' }} onChange={uploadHandler} />
+
+                            <button onClick={() => {
+                                inputRef.current.click();
+                            }} >
+                                Add image
+                            </button>
                         </Col>
                     </Row>
                 </div>
