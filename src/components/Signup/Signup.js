@@ -42,7 +42,7 @@ class Signup extends React.Component {
             pwd: this.state.pwd
 
         }
-        //post request 
+        //create account 
         axios.post('http://localhost/eventsWebSite-api/user/signup.php', user)
             .then(response => {
                 this.setState({ redirectToSignIn: true });

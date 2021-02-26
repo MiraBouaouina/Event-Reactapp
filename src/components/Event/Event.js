@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { Link, BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import React from "react";
 import classes from "../../pages/Event/Event.module.css";
 import ShowEvent from "./ShowEvent";
 import EditEventForm from "./EditEventForm";
-import classnames from 'classnames';
 import axios from 'axios';
-import picture from "../../assets/img/event3.jpg";
 import {
   Modal,
   Container,
@@ -22,9 +19,9 @@ class Event extends React.Component {
     };
     this.options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
     this.startdate = new Date(this.props.data.start_date);
-    this.enddate = new Date(this.props.data.end_date);
+    //this.enddate = new Date(this.props.data.end_date);
 
-    this.user = { //connected user profile
+    this.user = { //connected user account
       id: "",
       first_name: "",
       last_name: "",
@@ -103,7 +100,7 @@ class Event extends React.Component {
             </h5>
 
             <i class="fas fa-calendar-week "></i>
-            <h4> FROM {this.startdate.toLocaleDateString('en-US', this.options)} TO {this.enddate.toLocaleDateString('en-US', this.options)}</h4>
+            <h4> {this.startdate.toLocaleDateString('en-US', this.options)}</h4>
 
             <i class="fa fa-map-marker orange"></i>
             <h4> {this.props.data.place}</h4>

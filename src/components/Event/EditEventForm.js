@@ -106,7 +106,6 @@ class EditEventForm extends React.Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons users_circle-08"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
@@ -145,7 +144,6 @@ class EditEventForm extends React.Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons text_caps-small"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
 

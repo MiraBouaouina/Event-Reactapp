@@ -93,9 +93,10 @@ class ShowEvent extends React.Component {
     
                         <i class="fas fa-calendar-week "></i>
                         <h4>{this.startdate.toLocaleDateString('en-US', this.options)}</h4>
-                        <i class="fas fa-calendar-week "></i>
-                        <h4>{this.enddate.toLocaleDateString('en-US', this.options)}</h4>
-    
+                        
+                        <i class="fas fa-clock"></i>
+                        <h4>From {this.startdate.toLocaleTimeString('en-US')} to {this.enddate.toLocaleTimeString('en-US')}</h4>
+                        
                         <i class="fa fa-map-marker orange"></i>
                         <h4>{this.props.event.place}</h4>
                         <Row>

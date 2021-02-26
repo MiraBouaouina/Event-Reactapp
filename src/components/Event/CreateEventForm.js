@@ -25,9 +25,12 @@ class CreateEventForm extends React.Component {
             userFocus: false,
             passFocus: false,
             showPassword: false,
+            heureFocus: false,
             event_name: "",
             start_date: "",
             end_date: "",
+            heure_deb: "",
+            heure_fin: "",
             place: "",
             description: "",
             redirectToEvents: false
@@ -37,32 +40,42 @@ class CreateEventForm extends React.Component {
         let user = window.localStorage.getItem('user');
         console.log('this.state');
         console.log(this.state);
+        let currentDate = new Date();
+        let start = new Date(this.state.start_date);
+        console.log(currentDate);
+        if (currentDate > start) {
+            console.log('try another date')
+            alert('Choose another date please')
 
-        let event = {
-            event_name: this.state.event_name,
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            place: this.state.place,
-            description: this.state.description,
-            creator_id: JSON.parse(user).id
         }
-        console.log("--------CREATE EVENT FORM--------------");
-        console.log(this.props);
-        console.log("---------------------------------------");
+        else {
+            let event = {
+                event_name: this.state.event_name,
+                start_date: this.state.start_date,
+                end_date: this.state.start_date,
+                heure_deb: this.state.heure_deb,
+                heure_fin: this.state.heure_fin,
+                place: this.state.place,
+                description: this.state.description,
+                creator_id: JSON.parse(user).id
+            }
+            console.log("--------CREATE EVENT FORM--------------");
+            console.log(this.props);
+            console.log("---------------------------------------");
 
-        console.log(event);
-        //post request 
-        axios.post('http://localhost/eventsWebSite-api/event/create.php', event)
-            .then(response => {
-                console.log(response)
-                this.setState({ redirectToEvents: false });
-            })
-            .catch(error => {
-                console.log(error)
-            });
+            console.log(event);
+            //request to create a new event 
+            axios.post('http://localhost/eventsWebSite-api/event/create.php', event)
+                .then(response => {
+                    console.log(response)
+                    alert('Event created successfully ')
+                    this.setState({ redirectToEvents: true });
+                })
+                .catch(error => {
+                    console.log(error)
+                });
 
-
-
+        }
     }
 
     componentDidMount() {
@@ -114,7 +127,6 @@ class CreateEventForm extends React.Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons users_circle-08"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
@@ -135,7 +147,6 @@ class CreateEventForm extends React.Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons users_circle-08"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
@@ -146,7 +157,8 @@ class CreateEventForm extends React.Component {
                                             onBlur={() => this.setState({ lastFocus: false })}
                                         ></Input>
                                     </InputGroup>
-                                    <p>End date...</p>
+
+                                    <p style={{ display: 'flex', fontSize: '1 em' }}>Start time</p>
 
                                     <InputGroup
                                         className={
@@ -156,15 +168,34 @@ class CreateEventForm extends React.Component {
                                     >
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="now-ui-icons text_caps-small"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
-                                            placeholder="End Date..."
-                                            type="date"
-                                            onChange={(item) => { this.setState({ end_date: item.target.value }) }}
+                                            placeholder="Heure debut..."
+                                            type="time"
+                                            onChange={(item) => { this.setState({ heure_deb: item.target.value }) }}
                                             onFocus={() => this.setState({ userFocus: true })}
                                             onBlur={() => this.setState({ userFocus: false })}
+                                        ></Input>
+                                    </InputGroup>
+                                    <p style={{ display: 'flex', fontSize: '1 em' }}>End time</p>
+
+                                    <InputGroup
+                                        className={
+                                            "no-border input-lg" +
+                                            (this.state.heureFocus ? " input-group-focus" : "")
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            placeholder="Heure fin..." //Change to date fields!!!
+                                            type="time"
+                                            onChange={(item) => { this.setState({ heure_fin: item.target.value }) }}
+                                            onFocus={() => this.setState({ heureFocus: true })}
+                                            onBlur={() => this.setState({ heureFocus: false })}
                                         ></Input>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: "4px" }}
@@ -184,7 +215,10 @@ class CreateEventForm extends React.Component {
                                             ></Input>
                                         </InputGroup>
 
-                                        <InputGroup>
+                                        <InputGroup className={
+                                            "no-border input-lg" +
+                                            (this.state.passFocus ? " input-group-focus" : "")
+                                        }>
                                             <Input type="textarea"
                                                 placeholder="Description..."
                                                 onChange={(item) => { this.setState({ description: item.target.value }) }}
