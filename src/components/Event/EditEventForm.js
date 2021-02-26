@@ -25,15 +25,17 @@ class EditEventForm extends React.Component {
             userFocus: false,
             passFocus: false,
             showPassword: false,
+            heureFocus: false,
             event_name: this.props.event.event_name,
             start_date: this.props.event.start_date,
             end_date: this.props.event.end_date,
+            heure_deb: "",
+            heure_fin: "",
             place: this.props.event.place,
             description: this.props.event.description,
             redirectToEvents: false
         }
     }
-
 
     componentDidMount() {
         document.body.classList.add("login-page");
@@ -49,27 +51,38 @@ class EditEventForm extends React.Component {
 
     editEvent() {
         let user = window.localStorage.getItem('user');
+        let currentDate = new Date();
+        let start = new Date(this.state.start_date);
+        console.log(currentDate);
+        if (currentDate > start) {
+            alert('Choose another date please')
 
-        let event = {
-            id: this.props.event.id,
-            event_name: this.state.event_name,
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            place: this.state.place,
-            description: this.state.description,
-            creator_id: JSON.parse(user).id
+        }
+        else {
 
-        };
-        console.log('----event .start_date');
-        console.log(event.start_date);
-        axios.post('http://localhost/eventsWebSite-api/event/update.php', event)
-            .then(response => {
-                window.location.reload();
-            })
-            .catch(error => {
-                console.log(error)
-            });
+            let event = {
+                id: this.props.event.id,
+                event_name: this.state.event_name,
+                start_date: this.state.start_date,
+                end_date: this.state.start_date,
+                heure_deb: this.state.heure_deb,
+                heure_fin: this.state.heure_fin,
+                place: this.state.place,
+                description: this.state.description,
+                creator_id: JSON.parse(user).id
 
+            };
+            console.log(event)
+            axios.post('http://localhost/eventsWebSite-api/event/update.php', event)
+                .then(response => {
+                    console.log('event updated');
+                    alert('Event updated successfully ');
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
     }
     render() {
         const redirectToEvents = this.state.redirectToEvents;
@@ -129,7 +142,6 @@ class EditEventForm extends React.Component {
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
-                                            defaultValue={this.props.event.start_date}
                                             type="date"
                                             onChange={(item) => this.setState({ start_date: item.target.value })}
                                             onFocus={() => this.setState({ lastFocus: true })}
@@ -148,11 +160,28 @@ class EditEventForm extends React.Component {
                                         </InputGroupAddon>
 
                                         <Input
-                                            defaultValue={this.props.event.end_date}
-                                            type="date"
-                                            onChange={(item) => this.setState({ end_date: item.target.value })}
+                                            type="time"
+                                            onChange={(item) => this.setState({ heure_deb: item.target.value })}
                                             onFocus={() => this.setState({ userFocus: true })}
                                             onBlur={() => this.setState({ userFocus: false })}
+                                        ></Input>
+                                    </InputGroup>
+                                    <InputGroup
+                                        className={
+                                            "no-border input-lg" +
+                                            (this.state.heureFocus ? " input-group-focus" : "")
+                                        }
+                                    >
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+
+                                        <Input
+                                            type="time"
+                                            onChange={(item) => this.setState({ heure_fin: item.target.value })}
+                                            onFocus={() => this.setState({ heureFocus: true })}
+                                            onBlur={() => this.setState({ heureFocus: false })}
                                         ></Input>
                                     </InputGroup>
                                     <InputGroup style={{ marginBottom: "4px" }}
@@ -204,5 +233,4 @@ class EditEventForm extends React.Component {
         );
     }
 }
-
 export default EditEventForm;

@@ -45,8 +45,7 @@ const Profile = (props) => {
         setUser({
             ..._user
         })
-        console.log('useEffect');
-        console.log(user);
+
     }, [])
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);

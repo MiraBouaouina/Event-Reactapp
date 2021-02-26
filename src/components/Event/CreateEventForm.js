@@ -38,8 +38,7 @@ class CreateEventForm extends React.Component {
     }
     create() {
         let user = window.localStorage.getItem('user');
-        console.log('this.state');
-        console.log(this.state);
+
         let currentDate = new Date();
         let start = new Date(this.state.start_date);
         console.log(currentDate);
@@ -59,9 +58,6 @@ class CreateEventForm extends React.Component {
                 description: this.state.description,
                 creator_id: JSON.parse(user).id
             }
-            console.log("--------CREATE EVENT FORM--------------");
-            console.log(this.props);
-            console.log("---------------------------------------");
 
             console.log(event);
             //request to create a new event 
@@ -91,8 +87,6 @@ class CreateEventForm extends React.Component {
 
     }
     render() {
-        console.log('this.state');
-        console.log(this.state);
         const redirectToEvents = this.state.redirectToEvents;
         if (redirectToEvents === true) {
 
