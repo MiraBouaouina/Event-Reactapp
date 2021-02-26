@@ -40,11 +40,12 @@ class Events extends React.Component {
         console.log(this.props);
         console.log("--------------------------------");
     }
-    //must create event list outside of render else React returns error
     componentDidMount() {
         axios.get('http://localhost/eventsWebSite-api/event/fetch_all.php')
             .then(response => {
                 this.setState({ events: response.data });
+                console.log('in events response.data');
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error)
@@ -61,13 +62,6 @@ class Events extends React.Component {
             this.user.last_name = check.last_name;
             this.user.user_name = check.user_name;
             this.user.admin = check.admin;
-        }
-
-
-        if (true) {
-            console.log(check);
-            console.log(this.user);
-            console.log("--------------------------------");
         }
 
     }

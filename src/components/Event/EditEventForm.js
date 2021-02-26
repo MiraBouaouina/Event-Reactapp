@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,  BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Link, BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 import {
     Button,
@@ -25,15 +25,15 @@ class EditEventForm extends React.Component {
             userFocus: false,
             passFocus: false,
             showPassword: false,
-            event_name: "",
-            start_date: "",
-            end_date: "",
-            place: "",
-            description: "",
+            event_name: this.props.event.event_name,
+            start_date: this.props.event.start_date,
+            end_date: this.props.event.end_date,
+            place: this.props.event.place,
+            description: this.props.event.description,
             redirectToEvents: false
-           }
+        }
     }
-    
+
 
     componentDidMount() {
         document.body.classList.add("login-page");
@@ -47,34 +47,37 @@ class EditEventForm extends React.Component {
         };
     }
 
-        editEvent(){
+    editEvent() {
         let user = window.localStorage.getItem('user');
 
-        const event = {
+        let event = {
             id: this.props.event.id,
-            event_name: this.props.event.event_name,
-            start_date: this.props.event.start_date,
-            end_date: this.props.event.end_date,
-            place: this.props.event.place,
-            description: this.props.event.description,
+            event_name: this.state.event_name,
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
+            place: this.state.place,
+            description: this.state.description,
             creator_id: JSON.parse(user).id
+
         };
+        console.log('----event .start_date');
+        console.log(event.start_date);
         axios.post('http://localhost/eventsWebSite-api/event/update.php', event)
             .then(response => {
-                 window.location.reload();
-                })
+                window.location.reload();
+            })
             .catch(error => {
                 console.log(error)
-                });
-      
+            });
+
     }
     render() {
         const redirectToEvents = this.state.redirectToEvents;
-        if (redirectToEvents===true) {
-               
-               window.location.reload();
-               return <Redirect to="/Events"/>
-            }
+        if (redirectToEvents === true) {
+
+            window.location.reload();
+            return <Redirect to="/Events" />
+        }
         return (
 
             <div className="page-header clear-filter" filter-color="#5b14ff">
@@ -110,8 +113,7 @@ class EditEventForm extends React.Component {
 
                                             defaultValue={this.props.event.event_name}
                                             type="text"
-                                            onChange={(item) => { this.props.event.event_name= item.target.value }}
-
+                                            onChange={(item) => this.setState({ event_name: item.target.value })}
                                             onFocus={() => this.setState({ firstFocus: true })}
                                             onBlur={() => this.setState({ firstFocus: false })}
                                         ></Input>
@@ -129,8 +131,8 @@ class EditEventForm extends React.Component {
                                         </InputGroupAddon>
                                         <Input
                                             defaultValue={this.props.event.start_date}
-                                            type="text"
-                                            onChange={(item) => { this.props.event.start_date= item.target.value }}
+                                            type="date"
+                                            onChange={(item) => this.setState({ start_date: item.target.value })}
                                             onFocus={() => this.setState({ lastFocus: true })}
                                             onBlur={() => this.setState({ lastFocus: false })}
                                         ></Input>
@@ -149,8 +151,8 @@ class EditEventForm extends React.Component {
 
                                         <Input
                                             defaultValue={this.props.event.end_date}
-                                            type="text"
-                                            onChange={(item) => { this.props.event.end_date= item.target.value }}
+                                            type="date"
+                                            onChange={(item) => this.setState({ end_date: item.target.value })}
                                             onFocus={() => this.setState({ userFocus: true })}
                                             onBlur={() => this.setState({ userFocus: false })}
                                         ></Input>
@@ -161,24 +163,24 @@ class EditEventForm extends React.Component {
                                             (this.state.passFocus ? " input-group-focus" : "")
                                         }
                                     >
-                                       
+
 
                                         <InputGroup>
-                                        <Input
-                                            defaultValue={this.props.event.place}
-                                            onChange={(item) => { this.props.event.place= item.target.value }}
-                                            onFocus={() => this.setState({ passFocus: true })}
-                                            onBlur={() => this.setState({ passFocus: false })}
-                                        ></Input>
+                                            <Input
+                                                defaultValue={this.props.event.place}
+                                                onChange={(item) => this.setState({ place: item.target.value })}
+                                                onFocus={() => this.setState({ passFocus: true })}
+                                                onBlur={() => this.setState({ passFocus: false })}
+                                            ></Input>
                                         </InputGroup>
 
                                         <InputGroup>
-                                        <Input type="textarea"
-                                            defaultValue={this.props.event.description}
-                                            onChange={(item) => { this.props.event.description= item.target.value }}
-                                            onFocus={() => this.setState({ passFocus: true })}
-                                            onBlur={() => this.setState({ passFocus: false })}
-                                        ></Input>
+                                            <Input type="textarea"
+                                                defaultValue={this.props.event.description}
+                                                onChange={(item) => this.setState({ description: item.target.value })}
+                                                onFocus={() => this.setState({ passFocus: true })}
+                                                onBlur={() => this.setState({ passFocus: false })}
+                                            ></Input>
                                         </InputGroup>
                                     </InputGroup>
                                 </CardBody>
@@ -193,7 +195,7 @@ class EditEventForm extends React.Component {
                                     >
                                         Edit Event
                     </Button>
-                                  
+
                                 </CardFooter>
                             </Form>
                         </Card>

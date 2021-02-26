@@ -25,8 +25,10 @@ class ShowEvent extends React.Component {
         console.log("------IN SHOW EVENTS------");
         console.log(props);
         console.log("--------------------------");
-
-
+        this.startdate = new Date(this.props.event.start_date);
+        this.enddate = new Date(this.props.event.end_date);
+        this.options={ year: "numeric", month: "long", day: "numeric" };
+    
         this.user={ //connected user profile
                 id:"",
                 first_name: "",
@@ -90,10 +92,12 @@ class ShowEvent extends React.Component {
                         </h1>
     
                         <i class="fas fa-calendar-week "></i>
-                        <h4>{this.props.event.start_date}</h4>
+                        <h4>{this.startdate.toLocaleDateString('en-US', this.options)}</h4>
+                        <i class="fas fa-calendar-week "></i>
+                        <h4>{this.enddate.toLocaleDateString('en-US', this.options)}</h4>
     
                         <i class="fa fa-map-marker orange"></i>
-                        <h4>{this.props.event.end_date}</h4>
+                        <h4>{this.props.event.place}</h4>
                         <Row>
                             <Col>
                                 <Col >
@@ -120,12 +124,10 @@ class ShowEvent extends React.Component {
                                 Description
                             </h4>
                             <p>
-                                Design must be functional, and functionality must be translated into visual aesthetics without any reliance on gimmicks that have to be explained.
-    
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                        </p>
+                                {this.props.event.description}
+                            </p>
                         </Col>
-                        <Col sm="4" xs="6" >
+                        {/* <Col sm="4" xs="6" >
                             <div className={classes.owner}>
                                 <h4>
                                     Owner:
@@ -138,11 +140,10 @@ class ShowEvent extends React.Component {
                                 </Button>
     
                             </div>
-    
-                        </Col>
+                        </Col> */}
                     </Row>
     
-                    <Row>
+                    {/*<Row>
                         <Col>
                             <h4>
                                 Event schedule
@@ -219,7 +220,7 @@ class ShowEvent extends React.Component {
 
                         </Col>
                     </Row>
-                    
+                    */}
                 </Container >
 
                 

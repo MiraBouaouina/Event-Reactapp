@@ -13,8 +13,6 @@ import {
 
 } from "reactstrap";
 
-
-
 class Event extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +20,10 @@ class Event extends React.Component {
       modal3: false,
       modal2: false
     };
+    this.options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+    this.startdate = new Date(this.props.data.start_date);
+    this.enddate = new Date(this.props.data.end_date);
+
     this.user = { //connected user profile
       id: "",
       first_name: "",
@@ -94,7 +96,6 @@ class Event extends React.Component {
       <div>
 
         <Container>
-
           <div className={classes.owner}>
 
             <h5>
@@ -102,7 +103,7 @@ class Event extends React.Component {
             </h5>
 
             <i class="fas fa-calendar-week "></i>
-            <h4> {this.props.data.start_date}  {this.props.data.end_date}</h4>
+            <h4> FROM {this.startdate.toLocaleDateString('en-US', this.options)} TO {this.enddate.toLocaleDateString('en-US', this.options)}</h4>
 
             <i class="fa fa-map-marker orange"></i>
             <h4> {this.props.data.place}</h4>

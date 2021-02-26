@@ -34,25 +34,28 @@ class CreateEventForm extends React.Component {
         }
     }
     create() {
-        const event = {
+        let user = window.localStorage.getItem('user');
+        console.log('this.state');
+        console.log(this.state);
+
+        let event = {
             event_name: this.state.event_name,
             start_date: this.state.start_date,
             end_date: this.state.end_date,
             place: this.state.place,
             description: this.state.description,
-            creator_id: this.props.user.id
+            creator_id: JSON.parse(user).id
         }
         console.log("--------CREATE EVENT FORM--------------");
         console.log(this.props);
         console.log("---------------------------------------");
-
 
         console.log(event);
         //post request 
         axios.post('http://localhost/eventsWebSite-api/event/create.php', event)
             .then(response => {
                 console.log(response)
-                this.setState({ redirectToEvents: true });
+                this.setState({ redirectToEvents: false });
             })
             .catch(error => {
                 console.log(error)
@@ -75,6 +78,8 @@ class CreateEventForm extends React.Component {
 
     }
     render() {
+        console.log('this.state');
+        console.log(this.state);
         const redirectToEvents = this.state.redirectToEvents;
         if (redirectToEvents === true) {
 
