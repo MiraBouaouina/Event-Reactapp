@@ -67,7 +67,6 @@ const Profile = (props) => {
 
     }
 
-
     return (
         <div>
             <NavbarSecond user={props.user} loadUser={props.loadUser} />
@@ -86,11 +85,10 @@ const Profile = (props) => {
                             <h3>
                                 {user.user_name}
                             </h3>
-                        </Col>
-                        <Col>
+
                             <input ref={inputRef} type="file" style={{ display: 'none' }} onChange={uploadHandler} />
 
-                            <button onClick={() => {
+                            <button className={classes.btn} onClick={() => {
                                 inputRef.current.click();
                             }} >
                                 Add image

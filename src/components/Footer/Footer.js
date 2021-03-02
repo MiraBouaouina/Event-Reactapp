@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import { Container } from "reactstrap";
@@ -11,21 +12,13 @@ const Footer = () => {
                 <nav>
                     <ul>
                         <li>
-                            <a
-                                href="http://presentation.creative-tim.com?ref=nukr-transparent-footer"
-                                target="_blank"
+                            <Link to="/apropos"
+
                             >
                                 About Us
-              </a>
+                            </Link>
                         </li>
-                        <li>
-                            <a
-                                href="http://blog.creative-tim.com?ref=nukr-transparent-footer"
-                                target="_blank"
-                            >
-                                Blog
-              </a>
-                        </li>
+
                     </ul>
                 </nav>
                 <div className="copyright" id="copyright">

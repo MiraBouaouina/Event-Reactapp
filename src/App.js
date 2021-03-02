@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Signup from "./components/Signup/Signup";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
-import Event from "./pages/Event/Event";
 import Events from "./pages/Event/Events";
 import Login from "./components/Login/Login";
 import Apropos from "./pages/Apropos/Apropos";
@@ -69,10 +68,9 @@ class App extends React.Component {
                     <Route path="/home" render={(props) => <Home {...props} loadUser={this.loadUser} user={this.state.user} />} />
                     <Route path="/signup" render={(props) => <Signup {...props} loadUser={this.loadUser} />} />
                     <Route path="/profile" render={(props) => <Profile {...props} user={this.state.user} loadUser={this.loadUser} />} />
-                    <Route path="/event" render={(props) => <Event {...props} states={this.state} loadEvent={this.loadEvent} />} />
                     <Route path="/events" render={(props) => <Events {...props} user={this.state.user} loadUser={this.loadUser} />} />
                     <Route path="/login" render={(props) => <Login {...props} loadUser={this.loadUser} user={this.state.user} />} />
-                    <Route path="/apropos" render={(props) => <Apropos {...props} loadUser={this.loadUser} />} />
+                    <Route path="/apropos" render={(props) => <Apropos {...props} user={this.state.user} loadUser={this.loadUser} />} />
 
                     <Redirect to="/home" />
                 </Switch>

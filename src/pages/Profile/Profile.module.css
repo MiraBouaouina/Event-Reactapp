@@ -23,3 +23,6 @@ h3{
 .head h5{
     color: white;
 }
+.btn{
+    border-radius: 0.1em;
+}

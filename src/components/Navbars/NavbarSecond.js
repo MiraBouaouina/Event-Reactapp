@@ -146,9 +146,7 @@ class NavbarSecond extends React.Component {
                 </NavLink>
         </NavItem>
 
-
         {this.signToggle}
-
 
         <Modal className="card-signup" style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
           toggle={() => this.setState({ modal1: false })}

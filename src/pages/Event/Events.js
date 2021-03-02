@@ -6,13 +6,7 @@ import axios from 'axios';
 import {
     Container,
     Row,
-    Col,
-    Button,
-    TabContent,
-    TabPane,
-    Nav,
-    NavItem,
-    NavLink
+    Col
 } from "reactstrap";
 
 //core components
@@ -35,10 +29,6 @@ class Events extends React.Component {
             user_name: "",
             admin: ""
         };
-
-        console.log("-------------EVENTS--------------");
-        console.log(this.props);
-        console.log("--------------------------------");
     }
     componentDidMount() {
         axios.get('http://localhost/eventsWebSite-api/event/fetch_all.php')

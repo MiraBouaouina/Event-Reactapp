@@ -90,9 +90,9 @@ class Event extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ display: 'flex' }}>
 
-        <Container>
+        <Container >
           <div className={classes.owner}>
 
             <h5>

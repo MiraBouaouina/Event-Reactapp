@@ -97,7 +97,7 @@ class Participations extends React.Component {
         console.log("tabEvents outside axios", this.tabEvents);
         for (let i = 0; i < this.tabEvents.length; i++) {
             table.push(<tr> <td><Event data={this.tabEvents[i]} loadEvent={this.props.loadEvent} /> </td>
-                <td> <Button onClick={() => this.deleteParticipation(this.tabEvents[i])}
+                <td> <Button color="danger" onClick={() => this.deleteParticipation(this.tabEvents[i])}
                     id="delete-event">
                     Delete Participation
                                         </Button>
