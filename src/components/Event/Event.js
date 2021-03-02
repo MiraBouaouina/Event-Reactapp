@@ -45,17 +45,17 @@ class Event extends React.Component {
     if (this.user.id) {
       if (this.user.admin) {
         this.buttons = <>
-          <Button onClick={() => this.setState({ modal2: true })}
+          <Button style={{ backgroundColor: '#b352bf' }} onClick={() => this.setState({ modal2: true })}
             id="show-event">
             Show event
                         </Button>
 
-          <Button onClick={() => this.setState({ modal3: true })}
+          <Button style={{ backgroundColor: '#b352bf' }} onClick={() => this.setState({ modal3: true })}
             id="edit-event">
             Edit event
                         </Button>
 
-          <Button onClick={() => this.deleteEvent()}
+          <Button style={{ backgroundColor: '#b352bf' }} onClick={() => this.deleteEvent()}
             id="delete-event">
             Delete event
                         </Button>
@@ -63,13 +63,23 @@ class Event extends React.Component {
       }
       else {
         this.buttons = <>
-          <Button onClick={() => this.setState({ modal2: true })}
+          <Button style={{ backgroundColor: '#b352bf' }} onClick={() => this.setState({ modal2: true })}
             id="show-event">
             Show event
-                        </Button>
+          </Button>
         </>;
 
       }
+
+    }
+    else {
+      this.buttons = <>
+        <Button style={{ backgroundColor: '#b352bf' }} onClick={() => this.setState({ modal2: true })}
+          id="show-event">
+          Show event
+          </Button>
+      </>;
+
     }
 
   }
@@ -85,60 +95,46 @@ class Event extends React.Component {
         console.log(error)
       });
   }
-
-
-
   render() {
     return (
-      <div style={{ display: 'flex' }}>
+      <Container >
+        <div className={classes.owner}>
 
-        <Container >
-          <div className={classes.owner}>
+          <h4>
+            <strong> {this.props.data.event_name} </strong>
+          </h4>
 
-            <h5>
-              {this.props.data.event_name}
-            </h5>
+          <i class="fas fa-calendar-week "></i>
+          <h5> {this.startdate.toLocaleDateString('en-US', this.options)}</h5>
 
-            <i class="fas fa-calendar-week "></i>
-            <h4> {this.startdate.toLocaleDateString('en-US', this.options)}</h4>
+          <i class="fa fa-map-marker orange"></i>
+          <h5> {this.props.data.place}</h5>
 
-            <i class="fa fa-map-marker orange"></i>
-            <h4> {this.props.data.place}</h4>
-
+          <div className={classes.buttonsContainer}>
             {this.buttons}
-
-            <Modal style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-              toggle={() => this.setState({ modal2: false })}
-              isOpen={this.state.modal2}
-            >
-
-              <ShowEvent event={this.props.data} />
-
-            </Modal>
-
-            <Modal style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
-              toggle={() => this.setState({ modal3: false })}
-              isOpen={this.state.modal3}
-            >
-
-              <EditEventForm event={this.props.data} />
-
-            </Modal>
-
-
-
-
           </div>
 
+          <Modal style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+            toggle={() => this.setState({ modal2: false })}
+            isOpen={this.state.modal2}
+          >
 
-        </Container >
+            <ShowEvent event={this.props.data} />
 
+          </Modal>
 
+          <Modal style={{ backgroundColor: '#4b86b4', marginTop: '20px' }}
+            toggle={() => this.setState({ modal3: false })}
+            isOpen={this.state.modal3}
+          >
 
-      </div >
+            <EditEventForm event={this.props.data} />
+
+          </Modal>
+
+        </div>
+      </Container >
     );
-
-
 
   }
 }

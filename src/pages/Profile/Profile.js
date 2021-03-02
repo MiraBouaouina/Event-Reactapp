@@ -91,7 +91,7 @@ const Profile = (props) => {
                             <button className={classes.btn} onClick={() => {
                                 inputRef.current.click();
                             }} >
-                                Add image
+                                Update image
                             </button>
                         </Col>
                     </Row>

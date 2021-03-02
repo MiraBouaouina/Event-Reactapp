@@ -55,34 +55,20 @@ class Events extends React.Component {
         }
 
     }
-    createEventsTable() {
-        let table = [];
-        let data = [];
-
-        data = this.state.events;
-
-        data.map((event) => {
-            table.push(<tr><Event data={event} loadEvent={this.props.loadEvent} /> </tr>);
-
-        })
-        return table;
-
-
-
-    }
 
     render() {
         return (
             <div>
                 <NavbarSecond user={this.props.user} loadUser={this.props.loadUser} />
                 <Container className={classes.contenu}>
-
-
-                    <table>
-                        {this.createEventsTable()}
-                    </table>
-
-
+                    <Row>
+                        {this.state.events.map((event) => (
+                            <Col xs='6' >
+                                <Event data={event} loadEvent={this.props.loadEvent} />
+                            </Col>
+                        )
+                        )}
+                    </Row>
                 </Container >
                 <Footer />
             </div >
